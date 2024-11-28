@@ -1,5 +1,5 @@
 NAME = minishell
-CC = gcc
+GCC = gcc
 CFLAGS = -Wall -Wextra -Werror
 SRCS = main.c
 OBJS = $(SRCS:.c=.o)
@@ -7,10 +7,10 @@ OBJS = $(SRCS:.c=.o)
 all: $(NAME)
 
 $(NAME): $(OBJS)
-	$(CC) -o $(NAME) $(OBJS)
+	$(GCC) -o $(NAME) $(OBJS) -lreadline
 
 %.o: %.c
-	$(CC) $(CFLAGS) -c $< -o $@
+	$(GCC) $(CFLAGS) -c $< -o $@
 
 clean:
 	rm -f $(OBJS)

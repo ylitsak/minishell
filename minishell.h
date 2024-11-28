@@ -6,7 +6,7 @@
 /*   By: saylital <saylital@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/28 12:27:40 by saylital          #+#    #+#             */
-/*   Updated: 2024/11/28 12:29:04 by saylital         ###   ########.fr       */
+/*   Updated: 2024/11/28 12:58:30 by saylital         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,6 +14,7 @@
 # define MINISHELL_H
 # include <stdio.h>
 # include <stdlib.h>
-
+# include <readline/readline.h>
+# include <readline/history.h>
 
 #endif
