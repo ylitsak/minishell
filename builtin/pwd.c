@@ -1,24 +1,34 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   check_command.c                                    :+:      :+:    :+:   */
+/*   pwd.c                                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: saylital <saylital@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/12/02 13:17:41 by saylital          #+#    #+#             */
-/*   Updated: 2024/12/02 14:35:05 by saylital         ###   ########.fr       */
+/*   Created: 2024/12/02 13:50:38 by saylital          #+#    #+#             */
+/*   Updated: 2024/12/02 14:25:28 by saylital         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../minishell.h"
 
-void	check_command(char **command)
+void	ft_pwd(char **command)
 {
-	if (ft_strncmp(command[0], "echo", 4) == 0)
-		ft_echo(command);
-	else if (ft_strncmp(command[0], "pwd", 3) == 0)
-		ft_pwd(command);
-	else if (ft_strncmp(command[0], "exit", 4) == 0)
-		ft_exit(command);
+	char	*pwd;
+
+	if (command[1])
+	{
+		ft_putendl_fd("too many arguments", 2);
+		return ;		
+	}
+	pwd = getcwd(NULL, 0);
+	if (!pwd)
+	{
+		free_args(command);
+		ft_putendl_fd("getcwd failed", 2);
+		exit(EXIT_FAILURE);
+	}
+	printf("%s\n", pwd);
+	free(pwd);
 	return ;
 }

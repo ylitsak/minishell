@@ -6,7 +6,7 @@
 /*   By: saylital <saylital@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/28 12:27:11 by saylital          #+#    #+#             */
-/*   Updated: 2024/12/02 13:42:53 by saylital         ###   ########.fr       */
+/*   Updated: 2024/12/02 14:32:11 by saylital         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,10 +21,12 @@ void parsing(char *input)
 	{
 		free(input);
 		ft_putendl_fd("Malloc failed", 2);
+		exit(EXIT_FAILURE);
 	}
 	free(input);
 	check_command(command);
-	free_args(command);
+	if (command)
+		free_args(command);
 	return ;
 }
 
