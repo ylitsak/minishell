@@ -1,27 +1,28 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   minishell.h                                        :+:      :+:    :+:   */
+/*   ft_memset.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: saylital <saylital@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/11/28 12:27:40 by saylital          #+#    #+#             */
-/*   Updated: 2024/12/02 13:41:48 by saylital         ###   ########.fr       */
+/*   Created: 2024/04/17 10:31:47 by saylital          #+#    #+#             */
+/*   Updated: 2024/05/07 09:50:41 by saylital         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef MINISHELL_H
-# define MINISHELL_H
-# include "libft/libft.h"
-# include <stdio.h>
-# include <stdlib.h>
-# include <readline/readline.h>
-# include <readline/history.h>
+#include "libft.h"
 
-//utils.c
-void	free_args(char **commands);
-//builtin
-void	check_command(char **input);
-void	ft_echo(char **input);
+void	*ft_memset(void *str, int n, size_t len)
+{
+	unsigned char	*s;
+	size_t			i;
 
-#endif
+	s = (unsigned char *)str;
+	i = 0;
+	while (i < len)
+	{
+		s[i] = (unsigned char)n;
+		i++;
+	}
+	return (str);
+}

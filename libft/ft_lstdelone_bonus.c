@@ -1,27 +1,22 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   minishell.h                                        :+:      :+:    :+:   */
+/*   ft_lstdelone_bonus.c                               :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: saylital <saylital@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/11/28 12:27:40 by saylital          #+#    #+#             */
-/*   Updated: 2024/12/02 13:41:48 by saylital         ###   ########.fr       */
+/*   Created: 2024/05/03 08:45:18 by saylital          #+#    #+#             */
+/*   Updated: 2024/05/07 09:20:01 by saylital         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef MINISHELL_H
-# define MINISHELL_H
-# include "libft/libft.h"
-# include <stdio.h>
-# include <stdlib.h>
-# include <readline/readline.h>
-# include <readline/history.h>
+#include "libft.h"
 
-//utils.c
-void	free_args(char **commands);
-//builtin
-void	check_command(char **input);
-void	ft_echo(char **input);
+void	ft_lstdelone(t_list *lst, void (*del)(void *))
+{
+	t_list	*rmv_item;
 
-#endif
+	rmv_item = lst;
+	(del)(rmv_item->content);
+	free(rmv_item);
+}

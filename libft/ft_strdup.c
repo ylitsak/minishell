@@ -1,27 +1,33 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   minishell.h                                        :+:      :+:    :+:   */
+/*   ft_strdup.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: saylital <saylital@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/11/28 12:27:40 by saylital          #+#    #+#             */
-/*   Updated: 2024/12/02 13:41:48 by saylital         ###   ########.fr       */
+/*   Created: 2024/04/23 09:54:16 by saylital          #+#    #+#             */
+/*   Updated: 2024/05/07 09:51:02 by saylital         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef MINISHELL_H
-# define MINISHELL_H
-# include "libft/libft.h"
-# include <stdio.h>
-# include <stdlib.h>
-# include <readline/readline.h>
-# include <readline/history.h>
+#include "libft.h"
 
-//utils.c
-void	free_args(char **commands);
-//builtin
-void	check_command(char **input);
-void	ft_echo(char **input);
+char	*ft_strdup(const char *s1)
+{
+	size_t	i;
+	size_t	j;
+	char	*ptr;
 
-#endif
+	i = ft_strlen(s1);
+	j = 0;
+	ptr = malloc((i + 1) * sizeof(char));
+	if (ptr == NULL)
+		return (NULL);
+	while (s1[j] != '\0')
+	{
+		ptr[j] = s1[j];
+		j++;
+	}
+	ptr[j] = '\0';
+	return (ptr);
+}

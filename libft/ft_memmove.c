@@ -1,27 +1,42 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   minishell.h                                        :+:      :+:    :+:   */
+/*   ft_memmove.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: saylital <saylital@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/11/28 12:27:40 by saylital          #+#    #+#             */
-/*   Updated: 2024/12/02 13:41:48 by saylital         ###   ########.fr       */
+/*   Created: 2024/04/17 14:06:17 by saylital          #+#    #+#             */
+/*   Updated: 2024/05/13 09:20:33 by saylital         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef MINISHELL_H
-# define MINISHELL_H
-# include "libft/libft.h"
-# include <stdio.h>
-# include <stdlib.h>
-# include <readline/readline.h>
-# include <readline/history.h>
+#include "libft.h"
 
-//utils.c
-void	free_args(char **commands);
-//builtin
-void	check_command(char **input);
-void	ft_echo(char **input);
+void	*ft_memmove(void *dest, const void *src, size_t n)
+{
+	size_t	i;
+	char	*d;
+	char	*s;
 
-#endif
+	i = 0;
+	d = (char *)dest;
+	s = (char *)src;
+	if (!d && !s)
+		return (dest);
+	if (d < s)
+	{
+		while (i < n)
+		{
+			d[i] = s[i];
+			i++;
+		}
+	}
+	else if (s < d)
+	{
+		while (n--)
+		{
+			d[n] = s[n];
+		}
+	}
+	return (dest);
+}

@@ -1,27 +1,28 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   minishell.h                                        :+:      :+:    :+:   */
+/*   ft_calloc.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: saylital <saylital@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/11/28 12:27:40 by saylital          #+#    #+#             */
-/*   Updated: 2024/12/02 13:41:48 by saylital         ###   ########.fr       */
+/*   Created: 2024/04/22 11:14:36 by saylital          #+#    #+#             */
+/*   Updated: 2024/05/06 13:51:52 by saylital         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef MINISHELL_H
-# define MINISHELL_H
-# include "libft/libft.h"
-# include <stdio.h>
-# include <stdlib.h>
-# include <readline/readline.h>
-# include <readline/history.h>
+#include "libft.h"
 
-//utils.c
-void	free_args(char **commands);
-//builtin
-void	check_command(char **input);
-void	ft_echo(char **input);
+void	*ft_calloc(size_t count, size_t size)
+{
+	void	*ptr;
+	size_t	total_size;
 
-#endif
+	total_size = count * size;
+	if (count > 0 && size > 0 && total_size / size != count)
+		return (NULL);
+	ptr = (void *)malloc(total_size);
+	if (ptr == NULL)
+		return (NULL);
+	ft_memset (ptr, 0, total_size);
+	return (ptr);
+}

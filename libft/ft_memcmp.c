@@ -1,27 +1,32 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   minishell.h                                        :+:      :+:    :+:   */
+/*   ft_memcmp.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: saylital <saylital@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/11/28 12:27:40 by saylital          #+#    #+#             */
-/*   Updated: 2024/12/02 13:41:48 by saylital         ###   ########.fr       */
+/*   Created: 2024/04/19 14:21:16 by saylital          #+#    #+#             */
+/*   Updated: 2024/04/29 09:11:10 by saylital         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef MINISHELL_H
-# define MINISHELL_H
-# include "libft/libft.h"
-# include <stdio.h>
-# include <stdlib.h>
-# include <readline/readline.h>
-# include <readline/history.h>
+#include "libft.h"
 
-//utils.c
-void	free_args(char **commands);
-//builtin
-void	check_command(char **input);
-void	ft_echo(char **input);
+int	ft_memcmp(const void *s1, const void *s2, size_t n)
+{
+	unsigned char	*str1;
+	unsigned char	*str2;
 
-#endif
+	str1 = (unsigned char *)s1;
+	str2 = (unsigned char *)s2;
+	while (n--)
+	{
+		if (*str1 != *str2)
+		{
+			return (*str1 - *str2);
+		}
+		str1++;
+		str2++;
+	}
+	return (0);
+}

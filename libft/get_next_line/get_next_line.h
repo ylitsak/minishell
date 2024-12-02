@@ -1,27 +1,28 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   minishell.h                                        :+:      :+:    :+:   */
+/*   get_next_line.h                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: saylital <saylital@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/11/28 12:27:40 by saylital          #+#    #+#             */
-/*   Updated: 2024/12/02 13:41:48 by saylital         ###   ########.fr       */
+/*   Created: 2024/05/21 09:55:31 by saylital          #+#    #+#             */
+/*   Updated: 2024/08/12 12:27:17 by saylital         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef MINISHELL_H
-# define MINISHELL_H
-# include "libft/libft.h"
-# include <stdio.h>
-# include <stdlib.h>
-# include <readline/readline.h>
-# include <readline/history.h>
+#ifndef GET_NEXT_LINE_H
+# define GET_NEXT_LINE_H
+# include "../libft.h"
 
-//utils.c
-void	free_args(char **commands);
-//builtin
-void	check_command(char **input);
-void	ft_echo(char **input);
+# ifndef BUFFER_SIZE
+#  define BUFFER_SIZE 50
+# endif
+
+char	*get_next_line(int fd);
+char	*ft_strjoin_line(char *string, char *buffer);
+char	*ft_strchr(const char *s, int c);
+char	*ft_strdup_newline(char *s1);
+size_t	ft_strlen_newline(const char *str);
+size_t	ft_strlen(const char *str);
 
 #endif

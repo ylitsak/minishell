@@ -1,27 +1,31 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   minishell.h                                        :+:      :+:    :+:   */
+/*   echo.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: saylital <saylital@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/11/28 12:27:40 by saylital          #+#    #+#             */
-/*   Updated: 2024/12/02 13:41:48 by saylital         ###   ########.fr       */
+/*   Created: 2024/12/02 10:24:22 by saylital          #+#    #+#             */
+/*   Updated: 2024/12/02 13:35:19 by saylital         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef MINISHELL_H
-# define MINISHELL_H
-# include "libft/libft.h"
-# include <stdio.h>
-# include <stdlib.h>
-# include <readline/readline.h>
-# include <readline/history.h>
+#include "../minishell.h"
 
-//utils.c
-void	free_args(char **commands);
-//builtin
-void	check_command(char **input);
-void	ft_echo(char **input);
+void	ft_echo(char **input)
+{
+	int	i;
 
-#endif
+	i = 1;
+	if (ft_strncmp(input[1], "-n", 2) == 0)
+		i++;
+	while (input[i])
+	{
+		printf("%s", input[i++]);
+		if (input[i] != NULL)
+			printf(" ");
+	}
+	if (ft_strncmp(input[1], "-n", 2) != 0)
+		printf("\n");
+	return ;
+}

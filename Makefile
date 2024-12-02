@@ -1,22 +1,31 @@
 NAME = minishell
-GCC = gcc
+CC = cc
 CFLAGS = -Wall -Wextra -Werror
-SRCS = main.c
-OBJS = $(SRCS:.c=.o)
+INCLUDE = -I ./libft
+SRCS = main.c utils.c \
+		builtin/echo.c builtin/check_command.c
+OBJ_DIR = objects
+OBJS = $(addprefix $(OBJ_DIR)/,  $(SRCS:.c=.o))
+LIBFT = ./libft/libft.a
 
 all: $(NAME)
 
-$(NAME): $(OBJS)
-	$(GCC) -o $(NAME) $(OBJS) -lreadline
+$(NAME): $(OBJS) $(LIBFT)
+	$(CC) -o $(NAME) $(OBJS) $(LIBFT) -lreadline
 
-%.o: %.c
-	$(GCC) $(CFLAGS) -c $< -o $@
+$(LIBFT):
+	@$(MAKE) -C ./libft
+
+$(OBJ_DIR)/%.o: %.c
+	@mkdir -p $(dir $@)
+	$(CC) $(CFLAGS) -c $< -o $@
 
 clean:
-	rm -f $(OBJS)
+	rm -rf $(OBJ_DIR)
+	@$(MAKE) clean -C ./libft
 
 fclean: clean
-	rm -f $(NAME)
+	rm -f $(NAME) $(LIBFT)
 
 re: fclean all
 
