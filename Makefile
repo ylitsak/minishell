@@ -1,6 +1,6 @@
 NAME = minishell
 CC = cc
-CFLAGS = -Wall -Wextra -Werror
+CFLAGS = -Wall -Wextra
 INCLUDE = -I ./libft
 SRCS = main.c utils.c \
 		builtin/echo.c builtin/check_command.c builtin/pwd.c builtin/exit.c

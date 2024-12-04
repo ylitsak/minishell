@@ -6,13 +6,13 @@
 /*   By: saylital <saylital@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/28 12:27:11 by saylital          #+#    #+#             */
-/*   Updated: 2024/12/02 14:32:11 by saylital         ###   ########.fr       */
+/*   Updated: 2024/12/04 10:55:07 by saylital         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-void parsing(char *input)
+void parsing(char *input, t_minishell *shell)
 {
 	char **command;
 
@@ -24,17 +24,23 @@ void parsing(char *input)
 		exit(EXIT_FAILURE);
 	}
 	free(input);
-	check_command(command);
+	check_command(command, shell);
 	if (command)
 		free_args(command);
 	return ;
+}
+void static	init_shell(t_minishell *shell, char **envp)
+{
+	shell->env_list = envp;
+	shell->exit_code = 0;
 }
 
 int	main(int argc, char *argv[], char *envp[])
 {
 	(void)argc;
 	(void)argv;
-	(void)envp;
+	t_minishell shell;
+	init_shell(&shell, envp);
 	char	*input;
 	while (1)
 	{
@@ -48,7 +54,7 @@ int	main(int argc, char *argv[], char *envp[])
 		{
 			add_history(input);
 		}
-		parsing(input);
+		parsing(input, &shell);
 	}
-	return (0);
+	return (shell.exit_code);
 }

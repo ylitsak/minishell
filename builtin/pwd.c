@@ -6,19 +6,19 @@
 /*   By: saylital <saylital@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/02 13:50:38 by saylital          #+#    #+#             */
-/*   Updated: 2024/12/02 14:25:28 by saylital         ###   ########.fr       */
+/*   Updated: 2024/12/04 11:01:03 by saylital         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../minishell.h"
 
-void	ft_pwd(char **command)
+void	ft_pwd(char **command, t_minishell *shell)
 {
 	char	*pwd;
 
 	if (command[1])
 	{
-		ft_putendl_fd("too many arguments", 2);
+		print_error("pwd: too many arguments", shell, 1);
 		return ;		
 	}
 	pwd = getcwd(NULL, 0);
