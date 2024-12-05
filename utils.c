@@ -6,24 +6,38 @@
 /*   By: saylital <saylital@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/02 13:39:22 by saylital          #+#    #+#             */
-/*   Updated: 2024/12/04 10:52:14 by saylital         ###   ########.fr       */
+/*   Updated: 2024/12/05 14:03:08 by saylital         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-void	free_args(char **commands)
+void	free_args_and_env(char **commands, t_minishell *shell)
 {
 	int	i;
 
 	i = 0;
-	while(commands[i])
+	if (commands)
 	{
-		free(commands[i]);
-		i++;
+		while(commands[i])
+		{
+			free(commands[i]);
+			i++;
+		}
 	}
 	free(commands);
+	i = 0;
+	if (shell->env_list)
+	{
+		while(shell->env_list[i])
+		{
+			free(shell->env_list[i]);
+			i++;
+		}
+	}
+	free(shell->env_list);
 }
+
 void	print_error(char *message, t_minishell *shell, int status)
 {
 	ft_putendl_fd(message, 2);

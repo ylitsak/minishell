@@ -6,17 +6,22 @@
 /*   By: saylital <saylital@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/02 10:24:22 by saylital          #+#    #+#             */
-/*   Updated: 2024/12/04 10:11:07 by saylital         ###   ########.fr       */
+/*   Updated: 2024/12/05 10:28:01 by saylital         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../minishell.h"
 
-void	ft_echo(char **command)
+void	ft_echo(char **command, t_minishell *shell)
 {
 	int	i;
 
 	i = 1;
+	if (ft_strncmp(command[1], "$?", 2) == 0)
+	{
+		printf("%d\n", shell->exit_code);
+		return ;
+	}
 	if (ft_strncmp(command[1], "-n", 2) == 0)
 		i++;
 	while (command[i])

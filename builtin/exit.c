@@ -6,7 +6,7 @@
 /*   By: saylital <saylital@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/02 14:33:02 by saylital          #+#    #+#             */
-/*   Updated: 2024/12/04 11:41:38 by saylital         ###   ########.fr       */
+/*   Updated: 2024/12/05 14:06:06 by saylital         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,11 @@ static void	check_numeric(char **command, t_minishell *shell)
 
 	i = 0;
 	if (command[1][i] == '#')
-		return ;
+	{
+		shell->exit_code = 0;
+		printf("exit\n");
+		exit(shell->exit_code);
+	}
 	while(command[1][i])
 	{
 		if (ft_isalpha(command[1][i]) == 1)
@@ -38,6 +42,8 @@ void	ft_exit(char **command, t_minishell *shell)
 		print_error("exit: too many arguments", shell, 1);
 		return ;
 	}
-	// need to check # edge case since its apparently treated as a comment and ignores eveyrthing after that
-	return ;
+	shell->exit_code = ft_atoi(command[1]);
+	printf("exit\n");
+	free_args_and_env(command, shell);
+	exit(shell->exit_code);
 }

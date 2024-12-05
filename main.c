@@ -6,7 +6,7 @@
 /*   By: saylital <saylital@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/28 12:27:11 by saylital          #+#    #+#             */
-/*   Updated: 2024/12/04 10:55:07 by saylital         ###   ########.fr       */
+/*   Updated: 2024/12/05 14:07:26 by saylital         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,13 +25,13 @@ void parsing(char *input, t_minishell *shell)
 	}
 	free(input);
 	check_command(command, shell);
-	if (command)
-		free_args(command);
+	free_args_and_env(command, shell);
 	return ;
 }
+
 void static	init_shell(t_minishell *shell, char **envp)
 {
-	shell->env_list = envp;
+	shell->env_list = create_env(shell, envp);
 	shell->exit_code = 0;
 }
 
