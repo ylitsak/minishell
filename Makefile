@@ -2,8 +2,14 @@ NAME = minishell
 CC = cc
 CFLAGS = -Wall -Wextra
 INCLUDE = -I ./libft
-SRCS = main.c utils.c \
-		builtin/echo.c builtin/check_command.c builtin/pwd.c builtin/exit.c builtin/env.c
+SRCS = 	main.c \
+		utils.c \
+		builtin/echo.c \
+		builtin/check_command.c \
+		builtin/pwd.c \
+		builtin/exit.c \
+		builtin/env.c \
+		builtin/cd.c
 OBJ_DIR = objects
 OBJS = $(addprefix $(OBJ_DIR)/,  $(SRCS:.c=.o))
 LIBFT = ./libft/libft.a
