@@ -6,7 +6,7 @@
 /*   By: saylital <saylital@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/02 14:33:02 by saylital          #+#    #+#             */
-/*   Updated: 2024/12/05 14:06:06 by saylital         ###   ########.fr       */
+/*   Updated: 2024/12/05 14:20:43 by saylital         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,6 +44,7 @@ void	ft_exit(char **command, t_minishell *shell)
 	}
 	shell->exit_code = ft_atoi(command[1]);
 	printf("exit\n");
-	free_args_and_env(command, shell);
+	free_args(command);
+	free_env(shell->env_list);
 	exit(shell->exit_code);
 }

@@ -6,7 +6,7 @@
 /*   By: saylital <saylital@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/28 12:27:40 by saylital          #+#    #+#             */
-/*   Updated: 2024/12/05 13:40:34 by saylital         ###   ########.fr       */
+/*   Updated: 2024/12/05 14:19:37 by saylital         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,7 +28,8 @@ typedef struct s_minishell
 
 
 //utils.c
-void	free_args_and_env(char **commands, t_minishell *shell);
+void	free_args(char **commands);
+void	free_env(t_minishell *shell);
 void	print_error(char *message, t_minishell *shell, int status);
 //builtin
 void	check_command(char **command, t_minishell *shell);

@@ -6,13 +6,13 @@
 /*   By: saylital <saylital@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/02 13:39:22 by saylital          #+#    #+#             */
-/*   Updated: 2024/12/05 14:03:08 by saylital         ###   ########.fr       */
+/*   Updated: 2024/12/05 14:18:58 by saylital         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-void	free_args_and_env(char **commands, t_minishell *shell)
+void	free_args(char **commands)
 {
 	int	i;
 
@@ -26,6 +26,11 @@ void	free_args_and_env(char **commands, t_minishell *shell)
 		}
 	}
 	free(commands);
+}
+void	free_env(t_minishell *shell)
+{
+	int	i;
+
 	i = 0;
 	if (shell->env_list)
 	{

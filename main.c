@@ -6,7 +6,7 @@
 /*   By: saylital <saylital@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/28 12:27:11 by saylital          #+#    #+#             */
-/*   Updated: 2024/12/05 14:07:26 by saylital         ###   ########.fr       */
+/*   Updated: 2024/12/05 14:26:26 by saylital         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,7 @@ void parsing(char *input, t_minishell *shell)
 	}
 	free(input);
 	check_command(command, shell);
-	free_args_and_env(command, shell);
+	free_args(command);
 	return ;
 }
 
@@ -56,5 +56,6 @@ int	main(int argc, char *argv[], char *envp[])
 		}
 		parsing(input, &shell);
 	}
+	free_env(&shell);
 	return (shell.exit_code);
 }
