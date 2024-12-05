@@ -6,7 +6,7 @@
 /*   By: saylital <saylital@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/02 13:17:41 by saylital          #+#    #+#             */
-/*   Updated: 2024/12/05 10:32:17 by saylital         ###   ########.fr       */
+/*   Updated: 2024/12/05 14:42:40 by saylital         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,5 +22,7 @@ void	check_command(char **command, t_minishell *shell)
 		ft_exit(command, shell);
 	else if (ft_strncmp(command[0], "env", 3) == 0)
 		ft_env(command, shell);
+	else if (ft_strncmp(command[0], "cd", 2) == 0)
+		ft_cd(command, shell);
 	return ;
 }
