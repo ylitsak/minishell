@@ -6,7 +6,7 @@
 /*   By: saylital <saylital@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/05 14:39:40 by saylital          #+#    #+#             */
-/*   Updated: 2024/12/10 11:09:48 by saylital         ###   ########.fr       */
+/*   Updated: 2024/12/10 12:21:10 by saylital         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,6 +29,7 @@ void	ft_cd(char **command, t_minishell *shell)
 	if (count > 2)
 	{
 		ft_putendl_fd("minishell: cd: too many arguments", 2);
+		shell->exit_code = 1;
 		return ;
 	}
 	if (count == 1)
@@ -42,7 +43,10 @@ void	ft_cd(char **command, t_minishell *shell)
 	{
 		update_env(shell, "OLDPWD=", oldpwd);
 		if (chdir(command[1]) == -1)
+		{
 			perror("");
+			shell->exit_code = 1;
+		}
 		return ;
 	}
 }

@@ -6,7 +6,7 @@
 /*   By: saylital <saylital@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/02 10:24:22 by saylital          #+#    #+#             */
-/*   Updated: 2024/12/05 10:28:01 by saylital         ###   ########.fr       */
+/*   Updated: 2024/12/10 13:45:17 by saylital         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,5 +32,6 @@ void	ft_echo(char **command, t_minishell *shell)
 	}
 	if (ft_strncmp(command[1], "-n", 2) != 0)
 		printf("\n");
+	shell->exit_code = 0;
 	return ;
 }
