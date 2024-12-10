@@ -9,7 +9,8 @@ SRCS = 	main.c \
 		builtin/pwd.c \
 		builtin/exit.c \
 		builtin/env.c \
-		builtin/cd.c
+		builtin/cd.c \
+		builtin/update_env.c
 OBJ_DIR = objects
 OBJS = $(addprefix $(OBJ_DIR)/,  $(SRCS:.c=.o))
 LIBFT = ./libft/libft.a

@@ -6,7 +6,7 @@
 /*   By: saylital <saylital@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/05 10:34:14 by saylital          #+#    #+#             */
-/*   Updated: 2024/12/05 13:56:27 by saylital         ###   ########.fr       */
+/*   Updated: 2024/12/10 11:54:33 by saylital         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -69,6 +69,7 @@ void	ft_env(char **command, t_minishell *shell)
 		ft_putstr_fd("env: ’", 2);
 		ft_putstr_fd(command[1], 2);
 		ft_putendl_fd("’: No such file or directory", 2);
+		shell->exit_code = 127;
 		return ;
 	}
 	while (shell->env_list[i] != NULL)
