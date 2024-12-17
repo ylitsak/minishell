@@ -6,7 +6,7 @@
 /*   By: saylital <saylital@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/05 14:39:40 by saylital          #+#    #+#             */
-/*   Updated: 2024/12/10 12:21:10 by saylital         ###   ########.fr       */
+/*   Updated: 2024/12/17 13:43:16 by saylital         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,36 +15,38 @@
 void	ft_cd(char **command, t_minishell *shell)
 {
 	char	*oldpwd;
+	char	*home;
 	int		count;
 
 	oldpwd = getcwd(NULL, 0);
+	home =  getenv("HOME");
 	count = count_args(command);
 	if (!oldpwd)
 	{
 		free_args(command);
 		free_env(shell);
-		ft_putendl_fd("getcwd failed", 2);
-		exit(EXIT_FAILURE);
+		print_error("getcwd failed", shell, 1);
+		exit(shell->exit_code);
 	}
 	if (count > 2)
 	{
-		ft_putendl_fd("minishell: cd: too many arguments", 2);
-		shell->exit_code = 1;
+		print_error("minishell: cd: too many arguments", shell, 1);
 		return ;
 	}
+	update_pwd(shell, "OLDPWD=", oldpwd);
 	if (count == 1)
 	{
-		update_env(shell, "OLDPWD=", oldpwd);
-		if (chdir(command[0]) == -1)
+		if (chdir(home) == -1)
+			//need to free stuff and setup correct exit code if home not found
 			perror("");
 		return ;
 	}
 	else
 	{
-		update_env(shell, "OLDPWD=", oldpwd);
 		if (chdir(command[1]) == -1)
 		{
 			perror("");
+			//need to free stuff
 			shell->exit_code = 1;
 		}
 		return ;

@@ -6,7 +6,7 @@
 /*   By: saylital <saylital@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/28 12:27:11 by saylital          #+#    #+#             */
-/*   Updated: 2024/12/05 14:26:26 by saylital         ###   ########.fr       */
+/*   Updated: 2024/12/16 14:50:46 by saylital         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,6 +56,7 @@ int	main(int argc, char *argv[], char *envp[])
 		}
 		parsing(input, &shell);
 	}
+	rl_clear_history();
 	free_env(&shell);
 	return (shell.exit_code);
 }

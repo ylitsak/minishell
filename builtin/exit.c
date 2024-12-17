@@ -6,7 +6,7 @@
 /*   By: saylital <saylital@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/02 14:33:02 by saylital          #+#    #+#             */
-/*   Updated: 2024/12/05 14:34:46 by saylital         ###   ########.fr       */
+/*   Updated: 2024/12/17 12:40:57 by saylital         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,6 +17,8 @@ static void	check_numeric(char **command, t_minishell *shell)
 	int	i;
 
 	i = 0;
+	if (!command[1])
+		return ;
 	if (command[1][i] == '#')
 	{
 		shell->exit_code = 0;
@@ -38,13 +40,21 @@ static void	check_numeric(char **command, t_minishell *shell)
 
 void	ft_exit(char **command, t_minishell *shell)
 {
+	if (!command[1])
+	{
+		printf("exit\n");
+		free_args(command);
+		free_env(shell);
+		exit(shell->exit_code);		
+	}
 	check_numeric(command, shell);
 	if (command[2])
 	{
 		print_error("exit: too many arguments", shell, 1);
 		return ;
 	}
-	shell->exit_code = ft_atoi(command[1]);
+	else if (command[1])
+		shell->exit_code = ft_atoi(command[1]);
 	printf("exit\n");
 	free_args(command);
 	free_env(shell);

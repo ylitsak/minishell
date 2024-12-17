@@ -6,13 +6,13 @@
 /*   By: saylital <saylital@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/05 10:34:14 by saylital          #+#    #+#             */
-/*   Updated: 2024/12/10 12:10:39 by saylital         ###   ########.fr       */
+/*   Updated: 2024/12/17 14:52:55 by saylital         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../minishell.h"
 
-static int	env_list_size(char **envp)
+int	env_list_size(char **envp)
 {
 	int 	i;
 
@@ -77,5 +77,6 @@ void	ft_env(char **command, t_minishell *shell)
 		printf("%s\n", shell->env_list[i]);
 		i++;
 	}
+	shell->exit_code = 0;
 	return ;
 }

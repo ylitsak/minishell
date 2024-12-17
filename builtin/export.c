@@ -1,42 +1,48 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   update_env.c                                       :+:      :+:    :+:   */
+/*   export.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: saylital <saylital@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/12/09 13:47:21 by saylital          #+#    #+#             */
-/*   Updated: 2024/12/10 14:33:02 by saylital         ###   ########.fr       */
+/*   Created: 2024/12/17 12:43:38 by saylital          #+#    #+#             */
+/*   Updated: 2024/12/17 15:18:39 by saylital         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../minishell.h"
 
-
-int	update_env(t_minishell *shell, char *string, char *value)
+void	env_alphabetic(t_minishell *shell)
 {
 	int		i;
-	int		len;
-	char	*new_value;
+	int		size;
+	char	**copy_list;
 
 	i = 0;
-	new_value = ft_strjoin(string, value);
-	free(value);
-	if (!new_value)
-	{
-		ft_putendl_fd("Malloc failed update_env", 2);
-		return (-1);
-	}
-	len = ft_strlen(string);
+	size = env_list_size(shell->env_list);
+	copy_list = malloc((size + 1) * sizeof(char *));
+	//handle malloc fail and free stuff
 	while (shell->env_list[i])
 	{
-		if (ft_strncmp(shell->env_list[i], string, len) == 0)
-		{
-			free(shell->env_list[i]);
-			shell->env_list[i] = new_value;
-			return (0);
-		}
+		copy_list[i] = shell->env_list[i];
 		i++;
 	}
-	return (0);
+	copy_list[i] = NULL;
+	sort_aplhabetically()
+	
+}
+
+void	ft_export(char **command, t_minishell *shell)
+{
+	int	i;
+
+	i = 0;
+	if (!command[1])
+	{
+		//this probably need to be custom function and printed alphabetically
+		ft_env(command, shell);
+		return ;
+	}
+
+
 }
