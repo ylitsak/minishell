@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_lstiter_bonus.c                                 :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: saylital <saylital@student.hive.fi>        +#+  +:+       +#+        */
+/*   By: smishos <smishos@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/05/03 10:57:15 by saylital          #+#    #+#             */
-/*   Updated: 2024/05/07 09:20:15 by saylital         ###   ########.fr       */
+/*   Created: 2024/04/25 16:59:38 by smishos           #+#    #+#             */
+/*   Updated: 2024/04/27 15:40:48 by smishos          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,14 +14,11 @@
 
 void	ft_lstiter(t_list *lst, void (*f)(void *))
 {
-	t_list	*iter_list;
-	t_list	*temp;
-
-	iter_list = lst;
-	while (iter_list != NULL)
+	if (lst == NULL || f == NULL)
+		return ;
+	while (lst != NULL)
 	{
-		temp = iter_list->next;
-		f(iter_list->content);
-		iter_list = temp;
+		f(lst->content);
+		lst = lst->next;
 	}
 }

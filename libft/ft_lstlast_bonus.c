@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_lstlast_bonus.c                                 :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: saylital <saylital@student.hive.fi>        +#+  +:+       +#+        */
+/*   By: smishos <smishos@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/05/02 13:16:51 by saylital          #+#    #+#             */
-/*   Updated: 2024/05/03 14:35:27 by saylital         ###   ########.fr       */
+/*   Created: 2024/04/25 16:55:16 by smishos           #+#    #+#             */
+/*   Updated: 2024/04/27 15:40:50 by smishos          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,14 +14,11 @@
 
 t_list	*ft_lstlast(t_list *lst)
 {
-	t_list	*lastelement;
-
-	lastelement = lst;
-	if (lastelement == NULL)
+	if (lst == NULL)
 		return (NULL);
-	while (lastelement-> next != NULL)
+	while (lst->next != NULL)
 	{
-		lastelement = lastelement->next;
+		lst = lst->next;
 	}
-	return (lastelement);
+	return (lst);
 }

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_strrchr.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: saylital <saylital@student.hive.fi>        +#+  +:+       +#+        */
+/*   By: smishos <smishos@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/04/18 16:02:47 by saylital          #+#    #+#             */
-/*   Updated: 2024/05/13 11:19:35 by saylital         ###   ########.fr       */
+/*   Created: 2024/04/17 16:03:13 by smishos           #+#    #+#             */
+/*   Updated: 2024/04/23 13:47:21 by smishos          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,16 +14,20 @@
 
 char	*ft_strrchr(const char *s, int c)
 {
+	char	*end;
+	char	find;
 	size_t	i;
 
+	end = (char *)s;
+	find = (char)c;
 	i = ft_strlen(s);
 	while (i > 0)
 	{
-		if (s[i] == (char)c)
-			return ((char *)&s[i]);
+		if (end[i] == find)
+			return (end + i);
 		i--;
 	}
-	if (s[i] == (char)c)
-		return ((char *)&s[i]);
-	return (NULL);
+	if (end [i] == find)
+		return (end);
+	return (0);
 }

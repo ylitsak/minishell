@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_lstdelone_bonus.c                               :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: saylital <saylital@student.hive.fi>        +#+  +:+       +#+        */
+/*   By: smishos <smishos@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/05/03 08:45:18 by saylital          #+#    #+#             */
-/*   Updated: 2024/05/07 09:20:01 by saylital         ###   ########.fr       */
+/*   Created: 2024/04/25 16:57:18 by smishos           #+#    #+#             */
+/*   Updated: 2024/04/27 15:40:46 by smishos          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,9 +14,8 @@
 
 void	ft_lstdelone(t_list *lst, void (*del)(void *))
 {
-	t_list	*rmv_item;
-
-	rmv_item = lst;
-	(del)(rmv_item->content);
-	free(rmv_item);
+	if (lst == NULL || del == NULL)
+		return ;
+	del(lst->content);
+	free(lst);
 }

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_bzero.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: saylital <saylital@student.hive.fi>        +#+  +:+       +#+        */
+/*   By: smishos <smishos@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/04/17 11:27:06 by saylital          #+#    #+#             */
-/*   Updated: 2024/05/13 10:12:51 by saylital         ###   ########.fr       */
+/*   Created: 2024/04/18 16:17:22 by smishos           #+#    #+#             */
+/*   Updated: 2024/04/27 15:40:11 by smishos          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,14 +15,14 @@
 void	ft_bzero(void *s, size_t n)
 {
 	size_t	i;
+	char	*str;
 
+	str = (char *)s;
 	i = 0;
-	if (n == 0)
-		return ;
-	while (n > 0)
+	while (i < n)
 	{
-		((unsigned char *)s)[i] = 0;
+		str[i] = 0;
 		i++;
-		n--;
 	}
+	return ;
 }

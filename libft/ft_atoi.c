@@ -3,38 +3,36 @@
 /*                                                        :::      ::::::::   */
 /*   ft_atoi.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: saylital <saylital@student.hive.fi>        +#+  +:+       +#+        */
+/*   By: smishos <smishos@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/04/19 15:03:01 by saylital          #+#    #+#             */
-/*   Updated: 2024/05/08 09:32:42 by saylital         ###   ########.fr       */
+/*   Created: 2024/04/19 09:04:27 by smishos           #+#    #+#             */
+/*   Updated: 2024/11/28 17:18:15 by smishos          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 int	ft_atoi(const char *str)
 {
-	int		neg;
-	long	num;
+	int		i;
+	int		sign;
+	long	ret;
 	long	check;
 
-	neg = 1;
-	num = 0;
-	while (*str == ' ' || (*str >= 9 && *str <= 13))
-		str++;
-	if (*str == '-' || *str == '+')
+	i = 0;
+	sign = 1;
+	ret = 0;
+	while ((str[i] >= 9 && str[i] <= 13) || str[i] == 32)
+		i++;
+	if (str[i] == '-' || str[i] == '+')
+		if (str[i++] == '-')
+			sign = sign * -1;
+	while (str[i] >= '0' && str[i] <= '9')
 	{
-		if (*str == '-')
-			neg *= -1;
-		str++;
-	}
-	while (*str >= 48 && *str <= 57)
-	{
-		check = num;
-		num = (*str - '0') + num * 10;
-		if (num / 10 != check && neg == -1)
-			return (0);
-		if (num / 10 != check && neg == 1)
+		check = ret;
+		ret = (ret * 10) + (str[i++] - 48);
+		if (check > ret && sign == 1)
 			return (-1);
-		str++;
+		if (check > ret && sign == -1)
+			return (0);
 	}
-	return (num * neg);
+	return ((int)(ret * sign));
 }

@@ -3,18 +3,17 @@
 /*                                                        :::      ::::::::   */
 /*   ft_tolower.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: saylital <saylital@student.hive.fi>        +#+  +:+       +#+        */
+/*   By: smishos <smishos@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/04/17 10:18:30 by saylital          #+#    #+#             */
-/*   Updated: 2024/05/08 11:36:13 by saylital         ###   ########.fr       */
+/*   Created: 2024/04/17 16:00:21 by smishos           #+#    #+#             */
+/*   Updated: 2024/04/17 16:00:56 by smishos          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-int	ft_tolower(int n)
+int	ft_tolower(int c)
 {
-	if ((unsigned char)n >= 65 && (unsigned char)n <= 90)
-	{
-		return (n + 32);
-	}
-	return (n);
+	if (c >= 'A' && c <= 'Z')
+		return (c + ('a' - 'A'));
+	else
+		return (c);
 }

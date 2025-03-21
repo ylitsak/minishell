@@ -3,16 +3,16 @@
 /*                                                        :::      ::::::::   */
 /*   ft_strtrim.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: saylital <saylital@student.hive.fi>        +#+  +:+       +#+        */
+/*   By: smishos <smishos@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/04/24 11:20:37 by saylital          #+#    #+#             */
-/*   Updated: 2024/05/13 10:45:38 by saylital         ###   ########.fr       */
+/*   Created: 2024/04/25 16:26:18 by smishos           #+#    #+#             */
+/*   Updated: 2024/04/27 16:17:16 by smishos          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-static int	trimchars(char c, const char *set)
+static int	is_in_set(char c, const char *set)
 {
 	while (*set)
 	{
@@ -25,28 +25,24 @@ static int	trimchars(char c, const char *set)
 
 char	*ft_strtrim(char const *s1, char const *set)
 {
-	size_t		i;
-	size_t		j;
-	const char	*endptr;
-	char		*trimptr;
+	size_t	start;
+	size_t	end;
+	size_t	len;
+	char	*result;
 
-	if (!s1)
+	if (!s1 || !set)
 		return (NULL);
-	endptr = s1 + ft_strlen(s1) - 1;
-	j = 0;
-	while (*s1 != '\0' && trimchars(*s1, set))
-		s1++;
-	while (endptr >= s1 && trimchars(*endptr, set))
-		endptr--;
-	i = (endptr - s1) + 1;
-	trimptr = malloc((i + 1) * sizeof(char));
-	if (trimptr == NULL)
+	start = 0;
+	while (s1[start] && is_in_set(s1[start], set))
+		start++;
+	end = ft_strlen(s1);
+	while (end > start && is_in_set(s1[end - 1], set))
+		end--;
+	len = end - start;
+	result = (char *)malloc(len + 1);
+	if (!result)
 		return (NULL);
-	while (j < i)
-	{
-		trimptr[j] = s1[j];
-		j++;
-	}
-	trimptr[j] = '\0';
-	return (trimptr);
+	ft_memcpy(result, s1 + start, len);
+	result[len] = '\0';
+	return (result);
 }

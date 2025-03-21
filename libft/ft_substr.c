@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_substr.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: saylital <saylital@student.hive.fi>        +#+  +:+       +#+        */
+/*   By: smishos <smishos@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/04/23 10:27:34 by saylital          #+#    #+#             */
-/*   Updated: 2024/05/13 11:04:25 by saylital         ###   ########.fr       */
+/*   Created: 2024/04/25 16:09:27 by smishos           #+#    #+#             */
+/*   Updated: 2024/04/27 16:17:05 by smishos          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,25 +14,20 @@
 
 char	*ft_substr(char const *s, unsigned int start, size_t len)
 {
-	size_t	stringsize;
-	size_t	i;
-	char	*ptr;
+	size_t	s_len;
+	char	*substr;
 
-	stringsize = ft_strlen(s);
-	i = 0;
-	if (start >= stringsize)
-		len = 0;
-	if (len > stringsize - start)
-		len = stringsize - start;
-	ptr = malloc((len + 1) * sizeof(char));
-	if (ptr == NULL)
+	if (!s)
 		return (NULL);
-	while (i < len)
-	{
-		ptr[i] = s[start];
-		i++;
-		start++;
-	}
-	ptr[i] = '\0';
-	return (ptr);
+	s_len = ft_strlen(s);
+	if (start > s_len)
+		return (ft_strdup(""));
+	if (start + len > s_len)
+		len = s_len - start;
+	substr = (char *)malloc(len + 1);
+	if (!substr)
+		return (NULL);
+	ft_memcpy(substr, s + start, len);
+	substr[len] = '\0';
+	return (substr);
 }

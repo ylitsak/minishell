@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_lstadd_front_bonus.c                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: saylital <saylital@student.hive.fi>        +#+  +:+       +#+        */
+/*   By: smishos <smishos@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/05/02 08:39:07 by saylital          #+#    #+#             */
-/*   Updated: 2024/05/08 10:31:53 by saylital         ###   ########.fr       */
+/*   Created: 2024/04/25 16:52:57 by smishos           #+#    #+#             */
+/*   Updated: 2024/10/10 18:09:34 by smishos          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,6 +14,8 @@
 
 void	ft_lstadd_front(t_list **lst, t_list *new)
 {
+	if (new == NULL)
+		return ;
 	new->next = *lst;
 	*lst = new;
 }

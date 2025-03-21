@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_strncmp.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: saylital <saylital@student.hive.fi>        +#+  +:+       +#+        */
+/*   By: smishos <smishos@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/04/18 11:20:35 by saylital          #+#    #+#             */
-/*   Updated: 2024/05/07 09:52:17 by saylital         ###   ########.fr       */
+/*   Created: 2024/04/17 14:55:09 by smishos           #+#    #+#             */
+/*   Updated: 2024/12/29 13:17:39 by smishos          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,24 +14,17 @@
 
 int	ft_strncmp(const char *s1, const char *s2, size_t n)
 {
-	unsigned char	*str1;
-	unsigned char	*str2;
-	size_t			i;
+	size_t	i;
 
-	str1 = (unsigned char *)s1;
-	str2 = (unsigned char *)s2;
+	if (!s1 || !s2 || n == 0)
+		return (1);
 	i = 0;
-	if (n == 0)
-		return (0);
-	while (i < n && str1[i] != '\0' && str2[i] != '\0')
+	while ((s1[i] || s2[i]) && i < n)
 	{
-		if (str1[i] != str2[i])
-		{
-			return (str1[i] - str2[i]);
-		}
-		i++;
+		if (s1[i] != s2[i])
+			return ((unsigned char) s1[i] - (unsigned char) s2[i]);
+		else
+			i++;
 	}
-	if (i < n && str1[i] != str2[i])
-		return (str1[i] - str2[i]);
 	return (0);
 }

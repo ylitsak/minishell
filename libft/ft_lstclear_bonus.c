@@ -3,27 +3,26 @@
 /*                                                        :::      ::::::::   */
 /*   ft_lstclear_bonus.c                                :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: saylital <saylital@student.hive.fi>        +#+  +:+       +#+        */
+/*   By: smishos <smishos@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/05/03 09:26:15 by saylital          #+#    #+#             */
-/*   Updated: 2024/05/06 14:11:30 by saylital         ###   ########.fr       */
+/*   Created: 2024/04/25 16:58:34 by smishos           #+#    #+#             */
+/*   Updated: 2024/04/27 15:40:44 by smishos          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-void	ft_lstclear(t_list **lst, void (*del) (void *))
+void	ft_lstclear(t_list **lst, void (*del)(void *))
 {
-	t_list	*rmv_list;
 	t_list	*temp;
 
-	rmv_list = *lst;
-	while (rmv_list != NULL)
+	if (lst == NULL || del == NULL)
+		return ;
+	while (*lst != NULL)
 	{
-		temp = rmv_list->next;
-		del(rmv_list->content);
-		free(rmv_list);
-		rmv_list = temp;
+		temp = (*lst)->next;
+		del((*lst)->content);
+		free(*lst);
+		*lst = temp;
 	}
-	*lst = NULL;
 }

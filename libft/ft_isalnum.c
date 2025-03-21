@@ -3,22 +3,17 @@
 /*                                                        :::      ::::::::   */
 /*   ft_isalnum.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: saylital <saylital@student.hive.fi>        +#+  +:+       +#+        */
+/*   By: smishos <smishos@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/04/16 16:38:41 by saylital          #+#    #+#             */
-/*   Updated: 2024/05/08 11:30:45 by saylital         ###   ########.fr       */
+/*   Created: 2024/04/16 15:55:11 by smishos           #+#    #+#             */
+/*   Updated: 2024/04/27 15:40:20 by smishos          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-int	ft_isalnum(int n)
+int	ft_isalnum(int c)
 {
-	if (n > 255)
-		return (0);
-	if (((unsigned char)n >= 48 && (unsigned char)n <= 57)
-		|| ((unsigned char)n >= 65 && (unsigned char)n <= 90)
-		|| ((unsigned char)n >= 97 && (unsigned char)n <= 122))
-	{
+	if ((c >= 65 && c <= 90) || (c >= 97 && c <= 122) || (c >= 48 && c <= 57))
 		return (1);
-	}
-	return (0);
+	else
+		return (0);
 }

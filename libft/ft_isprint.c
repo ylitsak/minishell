@@ -3,20 +3,17 @@
 /*                                                        :::      ::::::::   */
 /*   ft_isprint.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: saylital <saylital@student.hive.fi>        +#+  +:+       +#+        */
+/*   By: smishos <smishos@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/04/17 10:06:37 by saylital          #+#    #+#             */
-/*   Updated: 2024/05/08 11:34:33 by saylital         ###   ########.fr       */
+/*   Created: 2024/04/17 11:52:57 by smishos           #+#    #+#             */
+/*   Updated: 2024/04/27 15:40:29 by smishos          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-int	ft_isprint(int n)
+int	ft_isprint(int c)
 {
-	if (n > 255)
-		return (0);
-	if ((unsigned char)n >= 32 && (unsigned char)n <= 126)
-	{
+	if (c >= 32 && c <= 126)
 		return (1);
-	}
-	return (0);
+	else
+		return (0);
 }

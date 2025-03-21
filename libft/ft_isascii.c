@@ -3,18 +3,17 @@
 /*                                                        :::      ::::::::   */
 /*   ft_isascii.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: saylital <saylital@student.hive.fi>        +#+  +:+       +#+        */
+/*   By: smishos <smishos@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/04/17 10:00:33 by saylital          #+#    #+#             */
-/*   Updated: 2024/04/17 10:05:57 by saylital         ###   ########.fr       */
+/*   Created: 2024/04/16 15:58:35 by smishos           #+#    #+#             */
+/*   Updated: 2024/04/27 15:40:24 by smishos          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-int	ft_isascii(int n)
+int	ft_isascii(int c)
 {
-	if (n >= 0 && n <= 127)
-	{
+	if (c >= 0 && c <= 127)
 		return (1);
-	}
-	return (0);
+	else
+		return (0);
 }

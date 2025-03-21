@@ -3,20 +3,17 @@
 /*                                                        :::      ::::::::   */
 /*   ft_isdigit.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: saylital <saylital@student.hive.fi>        +#+  +:+       +#+        */
+/*   By: smishos <smishos@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/04/16 16:34:37 by saylital          #+#    #+#             */
-/*   Updated: 2024/05/08 11:32:50 by saylital         ###   ########.fr       */
+/*   Created: 2024/04/16 15:51:43 by smishos           #+#    #+#             */
+/*   Updated: 2024/04/27 15:40:26 by smishos          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-int	ft_isdigit(int n)
+int	ft_isdigit(int c)
 {
-	if (n > 255)
-		return (0);
-	if ((unsigned char)n >= 48 && (unsigned char)n <= 57)
-	{
+	if (c >= 48 && c <= 57)
 		return (1);
-	}
-	return (0);
+	else
+		return (0);
 }

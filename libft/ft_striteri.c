@@ -3,28 +3,23 @@
 /*                                                        :::      ::::::::   */
 /*   ft_striteri.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: saylital <saylital@student.hive.fi>        +#+  +:+       +#+        */
+/*   By: smishos <smishos@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/05/01 11:28:01 by saylital          #+#    #+#             */
-/*   Updated: 2024/05/13 11:04:42 by saylital         ###   ########.fr       */
+/*   Created: 2024/04/25 16:35:17 by smishos           #+#    #+#             */
+/*   Updated: 2024/04/27 15:41:56 by smishos          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "libft.h"
-
 void	ft_striteri(char *s, void (*f)(unsigned int, char*))
 {
-	size_t			len;
-	size_t			i;
+	unsigned int	i;
 
 	if (!s || !f)
 		return ;
-	len = ft_strlen(s);
 	i = 0;
-	while (i < len)
+	while (s[i])
 	{
 		f(i, &s[i]);
 		i++;
 	}
-	return ;
 }

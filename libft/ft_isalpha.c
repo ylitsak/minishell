@@ -3,21 +3,17 @@
 /*                                                        :::      ::::::::   */
 /*   ft_isalpha.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: saylital <saylital@student.hive.fi>        +#+  +:+       +#+        */
+/*   By: smishos <smishos@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/04/16 10:26:54 by saylital          #+#    #+#             */
-/*   Updated: 2024/05/08 11:24:40 by saylital         ###   ########.fr       */
+/*   Created: 2024/04/16 12:55:17 by smishos           #+#    #+#             */
+/*   Updated: 2024/04/27 15:40:22 by smishos          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 int	ft_isalpha(int c)
 {
-	if (c > 255)
-		return (0);
-	if (((unsigned char)c >= 65 && (unsigned char)c <= 90)
-		|| ((unsigned char)c >= 97 && (unsigned char)c <= 122))
-	{
+	if ((c >= 65 && c <= 90) || (c >= 97 && c <= 122))
 		return (1);
-	}
-	return (0);
+	else
+		return (0);
 }
