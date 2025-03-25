@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cd.c                                               :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: smishos <smishos@student.hive.fi>          +#+  +:+       +#+        */
+/*   By: saylital <saylital@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/05 14:39:40 by saylital          #+#    #+#             */
-/*   Updated: 2025/03/20 16:02:55 by smishos          ###   ########.fr       */
+/*   Updated: 2025/03/25 14:17:40 by saylital         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -69,7 +69,9 @@ void	ft_cd(char **command, t_ms *shell)
 	char	*home;
 	int		count;
 
-	home = getenv("HOME");
+	home = get_home_var(shell);
+	if (!home)
+		return ;
 	count = count_args(command);
 	oldpwd = getcwd(NULL, 0);
 	if (!oldpwd)
@@ -85,4 +87,5 @@ void	ft_cd(char **command, t_ms *shell)
 		execute_cd(shell, command, oldpwd);
 	oldpwd = getcwd(NULL, 0);
 	update_pwd(shell, "PWD=", oldpwd);
+	free(home);
 }

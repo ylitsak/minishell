@@ -6,7 +6,7 @@
 /*   By: smishos <smishos@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/19 20:09:24 by smishos           #+#    #+#             */
-/*   Updated: 2025/03/19 20:09:25 by smishos          ###   ########.fr       */
+/*   Updated: 2025/03/24 17:33:04 by smishos          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -72,4 +72,11 @@ void	null_hd_and_oneline(t_ms *shell, t_command *cmd, int i)
 	make_heredoc_one_line(shell, cmd);
 	cmd->heredoc = 1;
 	cmd->command_input_index++;
+}
+
+int	print_ret(t_ms *shell, char *message)
+{
+	print_error(message, shell, 2, 0);
+	shell->token_error = 1;
+	return (1);
 }

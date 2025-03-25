@@ -6,7 +6,7 @@
 /*   By: smishos <smishos@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/19 20:07:41 by smishos           #+#    #+#             */
-/*   Updated: 2025/03/20 16:50:58 by smishos          ###   ########.fr       */
+/*   Updated: 2025/03/24 17:40:40 by smishos          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,8 +21,6 @@
 # include <readline/readline.h>
 # include <readline/history.h>
 # include <signal.h>
-# include <sys/ioctl.h>
-# include <termios.h>
 
 extern int	g_signal;
 
@@ -141,6 +139,7 @@ void			ft_pwd(t_ms *shell);
 void			ft_exit(t_command *command, t_ms *shell);
 void			ft_env(char **command, t_ms *shell);
 void			ft_cd(char **command, t_ms *shell);
+char			*get_home_var(t_ms *shell);
 void			if_count_is_1(t_ms *shell, char *oldpwd, char *home);
 void			execute_cd(t_ms *shell, char **command, char *oldpwd);
 void			error_and_exit_code(t_ms *shell);
@@ -246,6 +245,7 @@ void			realloc_and_write(t_ms *shell, const char *str, int inc_i, \
 					int write);
 void			var_len_not_zero(t_ms *shell, const char *str);
 void			null_hd_and_oneline(t_ms *shell, t_command *cmd, int i);
+int				print_ret(t_ms *shell, char *message);
 // tokens folder
 void			tokenize_input(t_ms *shell);
 int				is_operator(char c);

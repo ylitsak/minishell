@@ -6,7 +6,7 @@
 /*   By: smishos <smishos@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/19 20:09:40 by smishos           #+#    #+#             */
-/*   Updated: 2025/03/19 20:09:41 by smishos          ###   ########.fr       */
+/*   Updated: 2025/03/24 15:50:42 by smishos          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -103,7 +103,6 @@ void	tokenize_input(t_ms *shell)
 	}
 }
 
-// Function to check if character is a special shell character
 void	write_token_args(t_ms *shell)
 {
 	shell->buf_i = 0;
