@@ -6,7 +6,7 @@
 /*   By: saylital <saylital@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/05 14:39:40 by saylital          #+#    #+#             */
-/*   Updated: 2025/03/25 14:17:40 by saylital         ###   ########.fr       */
+/*   Updated: 2025/03/25 15:29:36 by saylital         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -76,6 +76,8 @@ void	ft_cd(char **command, t_ms *shell)
 	oldpwd = getcwd(NULL, 0);
 	if (!oldpwd)
 		return (if_not_oldpwd(shell, command, home, oldpwd));
+	if (shell->prev_pwd)
+		free(shell->prev_pwd);
 	shell->prev_pwd = ft_strdup(oldpwd);
 	if (count > 2)
 		return (too_many_args(shell, oldpwd));

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   update_pwd.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: smishos <smishos@student.hive.fi>          +#+  +:+       +#+        */
+/*   By: saylital <saylital@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/09 13:47:21 by saylital          #+#    #+#             */
-/*   Updated: 2025/03/20 16:21:47 by smishos          ###   ########.fr       */
+/*   Updated: 2025/03/25 14:51:01 by saylital         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,6 +37,7 @@ int	update_pwd(t_ms *shell, char *string, char *value)
 		}
 		i++;
 	}
+	free(new_value);
 	return (0);
 }
 
