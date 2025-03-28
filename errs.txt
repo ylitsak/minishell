@@ -1,7 +1,0 @@
-unset $OLDPWD
-cd ..
-echo $OLDPWD
-export
-unset OLDPWD
-cd ..
-echo $OLDPWD

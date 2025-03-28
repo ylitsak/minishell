@@ -6,7 +6,7 @@
 /*   By: saylital <saylital@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/09 13:47:21 by saylital          #+#    #+#             */
-/*   Updated: 2025/03/25 14:51:01 by saylital         ###   ########.fr       */
+/*   Updated: 2025/03/28 12:55:59 by saylital         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,6 +52,7 @@ void	if_count_is_1(t_ms *shell, char *oldpwd, char *home)
 	if (chdir(home) == -1)
 		error_and_exit_code(shell);
 	free(oldpwd);
+	free(home);
 }
 
 void	if_pipe_count(t_ms *shell, char **command, char *oldpwd)
