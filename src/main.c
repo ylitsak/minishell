@@ -6,7 +6,7 @@
 /*   By: saylital <saylital@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/19 20:09:54 by smishos           #+#    #+#             */
-/*   Updated: 2025/03/28 12:11:40 by saylital         ###   ########.fr       */
+/*   Updated: 2025/03/28 17:44:59 by saylital         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,6 +40,8 @@ void	process_input(t_ms *shell)
 	tokenize_input(shell);
 	if (!shell->token)
 		return ;
+	if (shell->token_error)
+		return ;
 	parse_tokens(shell);
 	if (check_arg_len(shell->commands) == 0)
 	{
@@ -47,8 +49,6 @@ void	process_input(t_ms *shell)
 		return ;
 	}
 	free_tokens(shell);
-	if (shell->token_error)
-		return ;
 	if (g_signal == SIGINT)
 	{
 		shell->exit_code = 130;

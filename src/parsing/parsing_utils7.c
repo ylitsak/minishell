@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parsing_utils7.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: smishos <smishos@student.hive.fi>          +#+  +:+       +#+        */
+/*   By: saylital <saylital@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/19 20:09:21 by smishos           #+#    #+#             */
-/*   Updated: 2025/03/24 17:33:01 by smishos          ###   ########.fr       */
+/*   Updated: 2025/03/28 17:43:05 by saylital         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -106,7 +106,7 @@ int	setup_command_input_count(t_ms *shell, t_command *cmd, t_token *token)
 	if (shell->command_input_count > 0)
 	{
 		cmd->command_input = (char **) malloc(sizeof(char *) * \
-			(shell->command_input_count));
+			(shell->command_input_count + 1));
 		if (!cmd->command_input)
 			malloc_error(shell);
 	}
