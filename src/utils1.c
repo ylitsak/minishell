@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   utils1.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: smishos <smishos@student.hive.fi>          +#+  +:+       +#+        */
+/*   By: saylital <saylital@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/19 20:09:59 by smishos           #+#    #+#             */
-/*   Updated: 2025/03/20 17:51:56 by smishos          ###   ########.fr       */
+/*   Updated: 2025/03/28 16:16:50 by saylital         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -83,6 +83,8 @@ void	ft_putstr_eq(char *str)
 			i++;
 			if (str[i] != '\"')
 				write(1, "\"", 1);
+			if (!str[i])
+				break ;
 		}
 		ft_putchar_fd(str[i], 1);
 		i++;
