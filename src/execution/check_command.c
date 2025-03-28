@@ -6,30 +6,27 @@
 /*   By: saylital <saylital@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/19 20:08:42 by smishos           #+#    #+#             */
-/*   Updated: 2025/03/28 12:17:22 by saylital         ###   ########.fr       */
+/*   Updated: 2025/03/28 20:08:54 by saylital         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../include/minishell.h"
 
-t_command	*checking_for_select_commands(t_ms *shell, \
-			t_command *command, int *new_pipe)
+t_command	*checking_for_select_commands(t_ms *shell, t_command *command, int *new_pipe)
 {
-	if ((ft_strncmp(command->args[0], "..", 2) == 0 && \
-		ft_strlen(command->args[0]) == 2))
+	if ((ft_strncmp(command->args[0], "..", 2) == 0 && ft_strlen(command->args[0]) == 2))
 	{
 		command = check_for_dots(command);
 		shell->select_command_found = 1;
 		return (command);
 	}
-	if (ft_strncmp(command->args[0], "exit", 4) == 0 && \
-		ft_strlen(command->args[0]) == 4)
+	if (ft_strncmp(command->args[0], "exit", 4) == 0 && ft_strlen(command->args[0]) == 4)
 	{
 		command = check_for_exit(shell, command, new_pipe);
 		shell->select_command_found = 1;
 		return (command);
 	}
-	if (is_parent_builtin(command->args, shell))
+	if (command->next == NULL && is_parent_builtin(command->args, shell))
 	{
 		command = command->next;
 		shell->select_command_found = 1;

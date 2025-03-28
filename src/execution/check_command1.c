@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   check_command1.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: smishos <smishos@student.hive.fi>          +#+  +:+       +#+        */
+/*   By: saylital <saylital@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/19 20:08:45 by smishos           #+#    #+#             */
-/*   Updated: 2025/03/20 14:55:42 by smishos          ###   ########.fr       */
+/*   Updated: 2025/03/28 20:12:14 by saylital         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,13 +14,6 @@
 
 int	is_parent_builtin(char **command, t_ms *shell)
 {
-	if (ft_strncmp(command[0], "export", 6) == 0 && ft_strlen(command[0]) == 6)
-	{
-		if (shell->child_count > 0)
-			return (0);
-		ft_export(command, shell);
-		return (1);
-	}
 	if (ft_strncmp(command[0], "unset", 5) == 0 && ft_strlen(command[0]) == 5)
 	{
 		ft_unset(command, shell);
@@ -29,12 +22,6 @@ int	is_parent_builtin(char **command, t_ms *shell)
 	else if (ft_strncmp(command[0], "cd", 2) == 0 && ft_strlen(command[0]) == 2)
 	{
 		ft_cd(command, shell);
-		return (1);
-	}
-	else if (ft_strncmp(command[0], "pwd", 3) == 0 && \
-		ft_strlen(command[0]) == 3)
-	{
-		ft_pwd(shell);
 		return (1);
 	}
 	return (0);
@@ -47,16 +34,23 @@ int	is_builtin(char **command, t_ms *shell)
 		ft_export(command, shell);
 		return (1);
 	}
-	else if ((ft_strncmp(command[0], "echo", 4) == 0 && \
-		ft_strlen(command[0]) == 4) || \
-		(ft_strncmp(command[0], "/bin/echo", 9) == 0 && \
-		ft_strlen(command[0]) == 9))
+	else if (ft_strncmp(command[0], "cd", 2) == 0 && ft_strlen(command[0]) == 2)
+	{
+		ft_cd(command, shell);
+		return (1);
+	}
+	else if (ft_strncmp(command[0], "pwd", 3) == 0 && ft_strlen(command[0]) == 3)
+	{
+		ft_pwd(shell);
+		return (1);
+	}
+	else if ((ft_strncmp(command[0], "echo", 4) == 0 && ft_strlen(command[0]) == 4) || \
+				(ft_strncmp(command[0], "/bin/echo", 9) == 0 && ft_strlen(command[0]) == 9))
 	{
 		ft_echo(command, shell);
 		return (1);
 	}
-	else if (ft_strncmp(command[0], "env", 3) == 0 && \
-			ft_strlen(command[0]) == 3)
+	else if (ft_strncmp(command[0], "env", 3) == 0 && ft_strlen(command[0]) == 3)
 	{
 		ft_env(command, shell);
 		return (1);
