@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parsing.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: smishos <smishos@student.hive.fi>          +#+  +:+       +#+        */
+/*   By: saylital <saylital@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/19 20:09:26 by smishos           #+#    #+#             */
-/*   Updated: 2025/03/24 17:20:32 by smishos          ###   ########.fr       */
+/*   Updated: 2025/03/29 16:29:20 by saylital         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -108,7 +108,7 @@ void	parse_tokens(t_ms *shell)
 			if (!token)
 				return ;
 		}
-		if (token->next == NULL)
+		if (!token->next)
 		{
 			handle_not_next_token(shell, cmd, token);
 			break ;

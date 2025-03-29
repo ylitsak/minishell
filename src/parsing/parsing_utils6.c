@@ -6,7 +6,7 @@
 /*   By: saylital <saylital@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/19 20:09:18 by smishos           #+#    #+#             */
-/*   Updated: 2025/03/28 22:43:15 by saylital         ###   ########.fr       */
+/*   Updated: 2025/03/29 16:50:41 by saylital         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -68,12 +68,10 @@ int	lead_pipe_check_lm(t_ms *shell, int lead_pipe)
 		{
 			ft_putstr_fd("minishell: syntax error near unexpected token `||'\n" \
 				, 2);
-			free_tokens(shell);
 			return (1);
 		}
 		ft_putstr_fd("minishell: syntax error near unexpected token `|'\n", 2);
 		shell->exit_code = 2;
-		free_tokens(shell);
 		return (1);
 	}
 	return (0);

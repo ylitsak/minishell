@@ -6,7 +6,7 @@
 /*   By: saylital <saylital@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/02 13:50:38 by saylital          #+#    #+#             */
-/*   Updated: 2025/03/19 17:42:00 by saylital         ###   ########.fr       */
+/*   Updated: 2025/03/29 16:17:36 by saylital         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,10 +50,11 @@ void	if_pwd(t_ms *shell, char *pwd)
 	}
 }
 
-void	ft_pwd(t_ms *shell)
+void	ft_pwd(char **command, t_ms *shell)
 {
 	char	*pwd;
 
+	(void)command;
 	pwd = getcwd(NULL, 0);
 	if (!pwd)
 	{

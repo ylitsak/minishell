@@ -6,7 +6,7 @@
 /*   By: saylital <saylital@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/19 20:07:41 by smishos           #+#    #+#             */
-/*   Updated: 2025/03/29 15:30:31 by saylital         ###   ########.fr       */
+/*   Updated: 2025/03/29 16:54:22 by saylital         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -135,7 +135,7 @@ int				event(void);
 void			ft_putstr_eq(char *str);
 //builtin
 void			ft_echo(char **command, t_ms *shell);
-void			ft_pwd(t_ms *shell);
+void			ft_pwd(char **command, t_ms *shell);
 void			ft_exit(t_command *command, t_ms *shell);
 void			ft_env(char **command, t_ms *shell);
 void			ft_cd(char **command, t_ms *shell);
@@ -191,6 +191,8 @@ t_command		*checking_for_select_commands(t_ms *shell, t_command *command, \
 					int *new_pipe);
 void			parent_wait(t_ms *shell, t_command *command, int *pipefd);
 void			pipe_failure(t_ms *shell);
+int				run_builtin(t_ms *shell, char **command, \
+					void (*function)(char **, t_ms *));
 // parser
 void			parse_tokens(t_ms *shell);
 char			*parse_quotes(char *str);

@@ -3,16 +3,15 @@
 /*                                                        :::      ::::::::   */
 /*   quicksort.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: smishos <smishos@student.hive.fi>          +#+  +:+       +#+        */
+/*   By: saylital <saylital@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/19 20:08:28 by smishos           #+#    #+#             */
-/*   Updated: 2025/03/19 20:08:29 by smishos          ###   ########.fr       */
+/*   Updated: 2025/03/29 16:01:33 by saylital         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../include/minishell.h"
 
-// Function to swap two elements
 void	swap(char **a, char **b)
 {
 	char	*temp;
@@ -22,7 +21,6 @@ void	swap(char **a, char **b)
 	*b = temp;
 }
 
-// Partition function for quicksort
 int	partition(char **arr, int low, int high)
 {
 	char	*pivot;
@@ -45,7 +43,6 @@ int	partition(char **arr, int low, int high)
 	return (i + 1);
 }
 
-// Quicksort function
 void	quicksort(char **arr, int low, int high)
 {
 	int	pi;

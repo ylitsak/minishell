@@ -6,32 +6,32 @@
 /*   By: saylital <saylital@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/19 20:08:45 by smishos           #+#    #+#             */
-/*   Updated: 2025/03/29 13:34:12 by saylital         ###   ########.fr       */
+/*   Updated: 2025/03/29 16:37:08 by saylital         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../include/minishell.h"
 
-int	is_parent_builtin(char **command, t_ms *shell)
+int	is_parent_builtin(char **cmd, t_ms *shell)
 {
-	if (ft_strncmp(command[0], "export", 6) == 0 && ft_strlen(command[0]) == 6)
+	if (ft_strncmp(cmd[0], "export", 6) == 0 && ft_strlen(cmd[0]) == 6)
 	{
-		if (command[1])
+		if (cmd[1])
 		{
-		ft_export(command, shell);
-		return (1);
+			ft_export(cmd, shell);
+			return (1);
 		}
 		else
 			return (0);
 	}
-	if (ft_strncmp(command[0], "unset", 5) == 0 && ft_strlen(command[0]) == 5)
+	if (ft_strncmp(cmd[0], "unset", 5) == 0 && ft_strlen(cmd[0]) == 5)
 	{
-		ft_unset(command, shell);
+		ft_unset(cmd, shell);
 		return (1);
 	}
-	else if (ft_strncmp(command[0], "cd", 2) == 0 && ft_strlen(command[0]) == 2)
+	else if (ft_strncmp(cmd[0], "cd", 2) == 0 && ft_strlen(cmd[0]) == 2)
 	{
-		ft_cd(command, shell);
+		ft_cd(cmd, shell);
 		return (1);
 	}
 	return (0);
@@ -39,32 +39,23 @@ int	is_parent_builtin(char **command, t_ms *shell)
 
 int	is_builtin(char **command, t_ms *shell)
 {
-	if (ft_strncmp(command[0], "export", 6) == 0 && ft_strlen(command[0]) == 6)
-	{
-		ft_export(command, shell);
-		return (1);
-	}
-	else if (ft_strncmp(command[0], "cd", 2) == 0 && ft_strlen(command[0]) == 2)
-	{
-		ft_cd(command, shell);
-		return (1);
-	}
-	else if (ft_strncmp(command[0], "pwd", 3) == 0 && ft_strlen(command[0]) == 3)
-	{
-		ft_pwd(shell);
-		return (1);
-	}
-	else if ((ft_strncmp(command[0], "echo", 4) == 0 && ft_strlen(command[0]) == 4) || \
-				(ft_strncmp(command[0], "/bin/echo", 9) == 0 && ft_strlen(command[0]) == 9))
-	{
-		ft_echo(command, shell);
-		return (1);
-	}
-	else if (ft_strncmp(command[0], "env", 3) == 0 && ft_strlen(command[0]) == 3)
-	{
-		ft_env(command, shell);
-		return (1);
-	}
+	if (ft_strncmp(command[0], "export", 6) == 0 && \
+		ft_strlen(command[0]) == 6)
+		return (run_builtin(shell, command, ft_export));
+	else if (ft_strncmp(command[0], "cd", 2) == 0 && \
+			ft_strlen(command[0]) == 2)
+		return (run_builtin(shell, command, ft_cd));
+	else if (ft_strncmp(command[0], "pwd", 3) == 0 && \
+		ft_strlen(command[0]) == 3)
+		return (run_builtin(shell, command, ft_pwd));
+	else if ((ft_strncmp(command[0], "echo", 4) == 0 && \
+			ft_strlen(command[0]) == 4) || \
+			(ft_strncmp(command[0], "/bin/echo", 9) == 0 && \
+			ft_strlen(command[0]) == 9))
+		return (run_builtin(shell, command, ft_echo));
+	else if (ft_strncmp(command[0], "env", 3) == 0 && \
+			ft_strlen(command[0]) == 3)
+		return (run_builtin(shell, command, ft_env));
 	return (0);
 }
 
