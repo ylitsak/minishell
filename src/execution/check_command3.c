@@ -6,7 +6,7 @@
 /*   By: saylital <saylital@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/19 20:08:51 by smishos           #+#    #+#             */
-/*   Updated: 2025/03/27 18:39:56 by saylital         ###   ########.fr       */
+/*   Updated: 2025/03/29 15:47:21 by saylital         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,12 +52,7 @@ void	handle_input_redirection(t_ms *shell, t_command *command, \
 void	handle_output_redirection(t_ms *shell, char *symbol, char *file)
 {
 	if (ft_strncmp(symbol, ">>", 2) == 0)
-	{
-		if (shell->child_count > 0)
-			write_file(shell, file);
-		else
-			append_file(shell, file);
-	}
+		append_file(shell, file);
 	else if (ft_strncmp(symbol, ">", 1) == 0)
 		write_file(shell, file);
 }

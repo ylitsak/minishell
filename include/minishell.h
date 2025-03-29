@@ -6,7 +6,7 @@
 /*   By: saylital <saylital@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/19 20:07:41 by smishos           #+#    #+#             */
-/*   Updated: 2025/03/28 12:12:51 by saylital         ###   ########.fr       */
+/*   Updated: 2025/03/29 15:30:31 by saylital         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -133,7 +133,6 @@ int				validate_str(char *str, char *acc_values);
 char			*count_for_malloc(char *str);
 int				event(void);
 void			ft_putstr_eq(char *str);
-int				check_arg_len(t_command *cmd);
 //builtin
 void			ft_echo(char **command, t_ms *shell);
 void			ft_pwd(t_ms *shell);
