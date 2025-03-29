@@ -6,7 +6,7 @@
 /*   By: saylital <saylital@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/19 20:08:45 by smishos           #+#    #+#             */
-/*   Updated: 2025/03/28 20:12:14 by saylital         ###   ########.fr       */
+/*   Updated: 2025/03/29 13:34:12 by saylital         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,6 +14,16 @@
 
 int	is_parent_builtin(char **command, t_ms *shell)
 {
+	if (ft_strncmp(command[0], "export", 6) == 0 && ft_strlen(command[0]) == 6)
+	{
+		if (command[1])
+		{
+		ft_export(command, shell);
+		return (1);
+		}
+		else
+			return (0);
+	}
 	if (ft_strncmp(command[0], "unset", 5) == 0 && ft_strlen(command[0]) == 5)
 	{
 		ft_unset(command, shell);

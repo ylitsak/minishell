@@ -6,7 +6,7 @@
 /*   By: saylital <saylital@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/19 20:09:54 by smishos           #+#    #+#             */
-/*   Updated: 2025/03/28 17:44:59 by saylital         ###   ########.fr       */
+/*   Updated: 2025/03/29 13:28:43 by saylital         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,11 +43,6 @@ void	process_input(t_ms *shell)
 	if (shell->token_error)
 		return ;
 	parse_tokens(shell);
-	if (check_arg_len(shell->commands) == 0)
-	{
-		cleanup(shell, 0);
-		return ;
-	}
 	free_tokens(shell);
 	if (g_signal == SIGINT)
 	{
@@ -82,7 +77,15 @@ void	input_loop(t_ms *shell)
 		if (init_signals() == 1)
 			return ;
 		shell->token_error = 0;
-		shell->input = readline("minishell> ");
+		if (isatty(fileno(stdin)))
+			shell->input = readline("minishell> ");
+		else
+		{
+			char *line;
+			line = get_next_line(fileno(stdin));
+			shell->input = ft_strtrim(line, "\n");
+			free(line);
+		}
 		if (g_signal == SIGINT)
 		{
 			g_signal = 0;
@@ -90,7 +93,7 @@ void	input_loop(t_ms *shell)
 		}
 		if (!shell->input)
 		{
-			ft_putstr_fd("exit\n", 2);
+			//ft_putstr_fd("exit\n", 2);
 			break ;
 		}
 		if (*(shell->input))

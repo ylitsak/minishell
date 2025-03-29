@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   check_command4.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: smishos <smishos@student.hive.fi>          +#+  +:+       +#+        */
+/*   By: saylital <saylital@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/19 20:08:54 by smishos           #+#    #+#             */
-/*   Updated: 2025/03/19 20:08:55 by smishos          ###   ########.fr       */
+/*   Updated: 2025/03/29 12:00:21 by saylital         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,6 +16,11 @@ void	execute_command(t_ms *shell, t_command *command)
 {
 	char	*path;
 
+	if (!command->args || !command->args[0] || command->args[0][0] == '\0')
+	{
+		cleanup(shell, 1);
+		exit(0);
+	}
 	if (!shell->exec)
 	{
 		path = find_executable_path(shell, command);

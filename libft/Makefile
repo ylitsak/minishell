@@ -51,6 +51,7 @@ SRCS = ft_atoi.c \
 	ft_lstmap_bonus.c \
 
 HEAD = libft.h
+GET_NEXT_LINE = get_next_line/get_next_line.c get_next_line/get_next_line_utils.c
 
 AR = ar rcs
 RM = rm -rf
@@ -58,7 +59,7 @@ LIB = ranlib
 
 CC = cc
 CFLAGS = -Wall -Werror -Wextra -g
-
+SRCS += $(GET_NEXT_LINE)
 OBJS = ${SRCS:.c=.o}
 
 all: ${NAME}

@@ -6,7 +6,7 @@
 /*   By: saylital <saylital@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/09 13:47:21 by saylital          #+#    #+#             */
-/*   Updated: 2025/03/28 12:55:59 by saylital         ###   ########.fr       */
+/*   Updated: 2025/03/28 21:19:11 by saylital         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,9 +57,6 @@ void	if_count_is_1(t_ms *shell, char *oldpwd, char *home)
 
 void	if_pipe_count(t_ms *shell, char **command, char *oldpwd)
 {
-	char	*temp;
-
-	temp = oldpwd;
 	if (chdir(command[1]) == -1)
 	{
 		ft_putstr_fd("cd: no such file or directory: ", 2);

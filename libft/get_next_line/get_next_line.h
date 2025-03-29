@@ -1,23 +1,28 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   utils2.c                                           :+:      :+:    :+:   */
+/*   get_next_line.h                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: saylital <saylital@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/03/28 12:12:00 by saylital          #+#    #+#             */
-/*   Updated: 2025/03/28 20:12:33 by saylital         ###   ########.fr       */
+/*   Created: 2024/05/21 09:55:31 by saylital          #+#    #+#             */
+/*   Updated: 2025/03/28 21:41:02 by saylital         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../include/minishell.h"
+#ifndef GET_NEXT_LINE_H
+# define GET_NEXT_LINE_H
+# include "../libft.h"
 
-int	check_arg_len(t_command *cmd)
-{
-	int	i;
+# ifndef BUFFER_SIZE
+#  define BUFFER_SIZE 50
+# endif
 
-	if (!cmd || !cmd->args)
-		return (0);
-	i = ft_strlen(cmd->args[0]);
-	return (i);
-}
+char	*get_next_line(int fd);
+char	*ft_strjoin_line(char *string, char *buffer);
+char	*ft_strchrnl(const char *s, int c);
+char	*ft_strdup_newline(char *s1);
+size_t	ft_strlen_newline(const char *str);
+size_t	ft_strlennl(const char *str);
+
+#endif

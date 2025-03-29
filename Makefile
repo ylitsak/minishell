@@ -6,7 +6,7 @@
 #    By: saylital <saylital@student.hive.fi>        +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2025/03/24 17:42:23 by smishos           #+#    #+#              #
-#    Updated: 2025/03/28 12:13:57 by saylital         ###   ########.fr        #
+#    Updated: 2025/03/29 13:30:49 by saylital         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -17,7 +17,6 @@ INCLUDE = -I ./libft
 SRCS = 	src/main.c \
 		src/utils.c \
 		src/utils1.c \
-		src/utils2.c \
 		src/builtin/echo.c \
 		src/builtin/pwd.c \
 		src/builtin/exit.c \
