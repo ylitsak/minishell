@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parsing_utils2.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: smishos <smishos@student.hive.fi>          +#+  +:+       +#+        */
+/*   By: saylital <saylital@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/19 20:09:08 by smishos           #+#    #+#             */
-/*   Updated: 2025/03/19 20:09:09 by smishos          ###   ########.fr       */
+/*   Updated: 2025/03/30 15:08:56 by saylital         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,7 +48,7 @@ void	handle_token_args(t_ms *shell, t_command *cmd, t_token *token)
 	expanded_value = handle_expansions(shell, token->value);
 	if (!expanded_value)
 		return ;
-	add_argument(cmd, expanded_value);
+	add_argument(cmd, expanded_value, shell);
 	cmd->arg_count++;
 	free(expanded_value);
 }

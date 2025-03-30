@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parsing_utils3.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: smishos <smishos@student.hive.fi>          +#+  +:+       +#+        */
+/*   By: saylital <saylital@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/19 20:09:10 by smishos           #+#    #+#             */
-/*   Updated: 2025/03/24 17:33:56 by smishos          ###   ########.fr       */
+/*   Updated: 2025/03/30 15:08:23 by saylital         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -94,7 +94,7 @@ void	handle_token_redir_out(t_ms *shell, t_command *cmd, t_token *token)
 	cmd->command_input_index += 2;
 }
 
-void	add_argument(t_command *cmd, char *arg)
+void	add_argument(t_command *cmd, char *arg, t_ms *shell)
 {
 	int		i;
 	char	**new_args;
@@ -108,9 +108,11 @@ void	add_argument(t_command *cmd, char *arg)
 	new_args = ft_realloc(cmd->args, sizeof(char *) * \
 	(i + 1), sizeof(char *) * (i + 2));
 	if (!new_args)
-		return ;
+		malloc_error(shell);
 	cmd->args = new_args;
 	cmd->args[i] = ft_strdup(arg);
+	if (!cmd->args[i])
+		malloc_error(shell);
 	cmd->args[i + 1] = NULL;
 	cmd->next = NULL;
 }

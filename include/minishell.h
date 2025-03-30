@@ -6,7 +6,7 @@
 /*   By: saylital <saylital@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/19 20:07:41 by smishos           #+#    #+#             */
-/*   Updated: 2025/03/29 16:54:22 by saylital         ###   ########.fr       */
+/*   Updated: 2025/03/30 15:08:46 by saylital         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -169,10 +169,10 @@ void			fork_error(int *new_pipe);
 char			*find_path(char *cmd, char **envp);
 int				is_dir(char *str);
 char			*find_directory(char **dir, char *splitted_args);
-void			find_exec_path_error(t_ms *shell, t_command *command, \
+void			find_exec_path_error(t_ms *shell, char **args, \
 					char *message, int exit_code);
-char			*access_check(t_ms *shell, t_command *command);
-char			*find_executable_path(t_ms *shell, t_command *command);
+char			*access_check(t_ms *shell, char **args);
+char			*find_executable_path(t_ms *shell, char **args);
 void			error_free_clean_exit(t_ms *shell, char *message);
 void			hir_hd_child_process(t_ms *shell, t_command *command, \
 					int *pipefd);
@@ -182,7 +182,7 @@ void			handle_output_redirection(t_ms *shell, char *symbol, \
 					char *file);
 void			wait_for_kids(t_ms *shell);
 void			execute_redir(t_ms *shell, t_command *command, int i);
-void			execute_command(t_ms *shell, t_command *command);
+void			execute_command(t_ms *shell, char **args);
 void			child_process(t_ms *shell, t_command *command, int *new_pipe);
 t_command		*parent_process(t_ms *shell, t_command *command, int *new_pipe);
 t_command		*check_for_dots(t_command *command);
@@ -196,7 +196,7 @@ int				run_builtin(t_ms *shell, char **command, \
 // parser
 void			parse_tokens(t_ms *shell);
 char			*parse_quotes(char *str);
-void			add_argument(t_command *cmd, char *arg);
+void			add_argument(t_command *cmd, char *arg, t_ms *shell);
 char			*handle_expansions(t_ms *shell, const char *str);
 void			handle_token_args(t_ms *shell, t_command *cmd, t_token *token);
 t_command		*new_cmd_struct(t_ms *shell);

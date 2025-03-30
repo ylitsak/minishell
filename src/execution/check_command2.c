@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   check_command2.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: smishos <smishos@student.hive.fi>          +#+  +:+       +#+        */
+/*   By: saylital <saylital@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/19 20:08:48 by smishos           #+#    #+#             */
-/*   Updated: 2025/03/19 20:08:49 by smishos          ###   ########.fr       */
+/*   Updated: 2025/03/30 14:54:03 by saylital         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,11 +41,11 @@ char	*find_directory(char **dir, char *splitted_args)
 	return (NULL);
 }
 
-void	find_exec_path_error(t_ms *shell, t_command *command, \
+void	find_exec_path_error(t_ms *shell, char **args, \
 							char *message, int exit_code)
 {
 	ft_putstr_fd("minishell: ", 2);
-	ft_putstr_fd(command->args[0], 2);
+	ft_putstr_fd(args[0], 2);
 	ft_putstr_fd(message, 2);
 	if (exit_code)
 	{
@@ -54,39 +54,39 @@ void	find_exec_path_error(t_ms *shell, t_command *command, \
 	}
 }
 
-char	*access_check(t_ms *shell, t_command *command)
+char	*access_check(t_ms *shell, char **args)
 {
-	if (access(command->args[0], F_OK) == 0)
+	if (access(args[0], F_OK) == 0)
 	{
-		if (access(command->args[0], X_OK) == 0)
+		if (access(args[0], X_OK) == 0)
 		{
-			if (!is_dir(command->args[0]))
-				return (ft_strdup(command->args[0]));
-			find_exec_path_error(shell, command, ": Is a directory\n", 126);
+			if (!is_dir(args[0]))
+				return (ft_strdup(args[0]));
+			find_exec_path_error(shell, args, ": Is a directory\n", 126);
 		}
-		find_exec_path_error(shell, command, ": Permission denied\n", 126);
+		find_exec_path_error(shell, args, ": Permission denied\n", 126);
 	}
-	find_exec_path_error(shell, command, ": No such file or directory\n", 0);
+	find_exec_path_error(shell, args, ": No such file or directory\n", 0);
 	return (NULL);
 }
 
-char	*find_executable_path(t_ms *shell, t_command *command)
+char	*find_executable_path(t_ms *shell, char **args)
 {
 	char	*get_path;
 	char	**path_directory;
 	char	*found_path;
 	char	**envp;
 
-	if (ft_strchr(command->args[0], '/'))
-		return (access_check(shell, command));
+	if (ft_strchr(args[0], '/'))
+		return (access_check(shell, args));
 	envp = shell->env_list;
-	get_path = find_path(command->args[0], envp);
-	if (get_path == NULL)
+	get_path = find_path(args[0], envp);
+	if (!get_path)
 		return (NULL);
 	path_directory = ft_split(get_path, ':');
-	if (path_directory == NULL)
+	if (!path_directory)
 		return (NULL);
-	found_path = find_directory(path_directory, command->args[0]);
+	found_path = find_directory(path_directory, args[0]);
 	free_split(path_directory);
 	return (found_path);
 }

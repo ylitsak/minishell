@@ -6,7 +6,7 @@
 /*   By: saylital <saylital@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/19 20:09:21 by smishos           #+#    #+#             */
-/*   Updated: 2025/03/29 16:46:59 by saylital         ###   ########.fr       */
+/*   Updated: 2025/03/30 18:17:45 by saylital         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -66,6 +66,11 @@ int	pipe_syntax_check(t_ms *shell, t_token *token)
 void	pipe_no_next_token(t_ms *shell)
 {
 	shell->pipe_rdl_tokens = readline("> ");
+	if (!shell->pipe_rdl_tokens)
+	{
+		cleanup(shell, 1);
+		exit(2);
+	}
 	add_history(shell->pipe_rdl_tokens);
 	tokenize_input_lm(shell);
 	free(shell->pipe_rdl_tokens);
