@@ -6,7 +6,7 @@
 /*   By: saylital <saylital@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/05 10:34:14 by saylital          #+#    #+#             */
-/*   Updated: 2025/03/19 17:37:22 by saylital         ###   ########.fr       */
+/*   Updated: 2025/03/31 14:55:08 by saylital         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -74,7 +74,8 @@ void	ft_env(char **command, t_ms *shell)
 	}
 	while (shell->env_list[i])
 	{
-		ft_putendl_fd(shell->env_list[i], 1);
+		if (ft_strchr(shell->env_list[i], '='))
+			ft_putendl_fd(shell->env_list[i], 1);
 		i++;
 	}
 	shell->exit_code = 0;

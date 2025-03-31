@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   export2.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: smishos <smishos@student.hive.fi>          +#+  +:+       +#+        */
+/*   By: saylital <saylital@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/19 20:08:22 by smishos           #+#    #+#             */
-/*   Updated: 2025/03/20 17:52:44 by smishos          ###   ########.fr       */
+/*   Updated: 2025/03/31 14:37:18 by saylital         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,6 +54,7 @@ void	set_env_variable(t_ms *shell, char *key, char *value, char *equal_sign)
 			return (export_error(shell, key));
 		i++;
 	}
+	i = 0;
 	while (shell->env_list[i])
 	{
 		if (sift_through_env(shell, key, value, i))

@@ -6,16 +6,13 @@
 /*   By: saylital <saylital@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/19 20:07:41 by smishos           #+#    #+#             */
-/*   Updated: 2025/03/30 15:08:46 by saylital         ###   ########.fr       */
+/*   Updated: 2025/03/31 13:53:57 by saylital         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef MINISHELL_H
 # define MINISHELL_H
 # include "../libft/libft.h"
-# include <stdio.h>
-# include <stdlib.h>
-# include <unistd.h>
 # include <fcntl.h>
 # include <sys/wait.h>
 # include <readline/readline.h>
@@ -24,7 +21,6 @@
 
 extern int	g_signal;
 
-// Simplified token types
 enum e_token_type
 {
 	TOKEN_ARGS,
