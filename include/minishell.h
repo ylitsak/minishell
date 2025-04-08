@@ -6,7 +6,7 @@
 /*   By: saylital <saylital@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/19 20:07:41 by smishos           #+#    #+#             */
-/*   Updated: 2025/03/31 13:53:57 by saylital         ###   ########.fr       */
+/*   Updated: 2025/04/07 15:19:58 by saylital         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,6 +18,7 @@
 # include <readline/readline.h>
 # include <readline/history.h>
 # include <signal.h>
+# include <errno.h>
 
 extern int	g_signal;
 
@@ -107,6 +108,10 @@ typedef struct s_ms
 	int				select_command_found;
 	int				prev_pipe_in;
 	int				exec;
+	int				hd_count;
+	int				alpha_exit;
+	int				processed_quotes;
+	int				not_executable;
 }	t_ms;
 
 // signals
@@ -117,6 +122,7 @@ void			sig_handler_heredoc(int signal);
 int				default_signals(void);
 int				init_signals(void);
 void			start_sig_checkers(void *handler_func);
+void			start_sig_checkers_hd(void *handler_func);
 //utils.c
 void			free_args(char **commands);
 void			free_env(t_ms *shell);
@@ -133,8 +139,16 @@ void			ft_putstr_eq(char *str);
 void			ft_echo(char **command, t_ms *shell);
 void			ft_pwd(char **command, t_ms *shell);
 void			ft_exit(t_command *command, t_ms *shell);
+int				actually_exit(t_ms *shell);
+long long		msatol(const char *str);
 void			ft_env(char **command, t_ms *shell);
 void			ft_cd(char **command, t_ms *shell);
+void			ft_cd_no_arg(char **command, t_ms *shell);
+void			if_not_oldpwd(t_ms *shell, char **command, \
+					char *home, char *oldpwd);
+void			too_many_args(t_ms *shell);
+int				cd_has_null(char **command, t_ms *shell);
+void			prev_pwd_func(t_ms *shell, char *oldpwd);
 char			*get_home_var(t_ms *shell);
 void			if_count_is_1(t_ms *shell, char *oldpwd, char *home);
 void			execute_cd(t_ms *shell, char **command, char *oldpwd);
@@ -144,7 +158,7 @@ void			create_env(t_ms *shell, char **envp);
 int				update_pwd(t_ms *shell, char *string, char *value);
 int				env_list_size(char **envp);
 void			ft_export(char **command, t_ms *shell);
-void			print_variables(char	**copy_list, int i);
+void			print_variables(char **copy_list, int i);
 void			print_sorted_env(t_ms *shell);
 void			export_error(t_ms *shell, char *arg);
 void			if_value_not_empty(t_ms *shell, char *key, char *value, int i);
@@ -164,7 +178,7 @@ int				is_builtin(char **command, t_ms *shell);
 void			fork_error(int *new_pipe);
 char			*find_path(char *cmd, char **envp);
 int				is_dir(char *str);
-char			*find_directory(char **dir, char *splitted_args);
+char			*find_directory(t_ms *shell, char **dir, char *arg);
 void			find_exec_path_error(t_ms *shell, char **args, \
 					char *message, int exit_code);
 char			*access_check(t_ms *shell, char **args);
@@ -181,15 +195,23 @@ void			execute_redir(t_ms *shell, t_command *command, int i);
 void			execute_command(t_ms *shell, char **args);
 void			child_process(t_ms *shell, t_command *command, int *new_pipe);
 t_command		*parent_process(t_ms *shell, t_command *command, int *new_pipe);
-t_command		*check_for_dots(t_command *command);
-t_command		*check_for_exit(t_ms *shell, t_command *command, int *new_pipe);
-t_command		*checking_for_select_commands(t_ms *shell, t_command *command, \
-					int *new_pipe);
+t_command		*check_for_dots(t_ms *shell, t_command *command);
+t_command		*check_for_dot(t_ms *shell, t_command *command);
+t_command		*check_for_exit(t_ms *shell, t_command *command);
+t_command		*checking_for_select_commands(t_ms *shell, t_command *command);
 void			parent_wait(t_ms *shell, t_command *command, int *pipefd);
 void			pipe_failure(t_ms *shell);
 int				run_builtin(t_ms *shell, char **command, \
 					void (*function)(char **, t_ms *));
+char			*cmd_not_found(char *splitted_args);
+void			perm_den_exit(t_ms *shell, char *executable_path);
+int				is_dir(char *str);
+void			close_prew_pipe(t_ms *shell);
 // parser
+void			handle_not_next_token(t_ms *shell, \
+					t_command *cmd, t_token *token);
+t_command		*if_token_pipe(t_ms *shell, t_command *cmd, t_token *token);
+int				if_no_next_token(t_ms *shell, t_command *cmd, t_token *token);
 void			parse_tokens(t_ms *shell);
 char			*parse_quotes(char *str);
 void			add_argument(t_command *cmd, char *arg, t_ms *shell);
@@ -244,6 +266,9 @@ void			realloc_and_write(t_ms *shell, const char *str, int inc_i, \
 void			var_len_not_zero(t_ms *shell, const char *str);
 void			null_hd_and_oneline(t_ms *shell, t_command *cmd, int i);
 int				print_ret(t_ms *shell, char *message);
+void			set_value_after_parse(t_ms *shell, char *temp);
+void			var_val_mal_check(t_ms *shell, char *joined);
+void			mhol_strjoin(t_command *cmd, char *line, int i);
 // tokens folder
 void			tokenize_input(t_ms *shell);
 int				is_operator(char c);

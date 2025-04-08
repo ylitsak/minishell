@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parsing_utils2.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: saylital <saylital@student.hive.fi>        +#+  +:+       +#+        */
+/*   By: smishos <smishos@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/19 20:09:08 by smishos           #+#    #+#             */
-/*   Updated: 2025/03/30 15:08:56 by saylital         ###   ########.fr       */
+/*   Updated: 2025/04/05 17:26:26 by smishos          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,7 +50,8 @@ void	handle_token_args(t_ms *shell, t_command *cmd, t_token *token)
 		return ;
 	add_argument(cmd, expanded_value, shell);
 	cmd->arg_count++;
-	free(expanded_value);
+	if (expanded_value)
+		free(expanded_value);
 }
 
 t_command	*new_cmd_struct(t_ms *shell)
@@ -95,19 +96,22 @@ void	make_heredoc_one_line(t_ms *shell, t_command *cmd)
 {
 	int		i;
 	char	*line;
-	char	*temp;
 
 	i = 0;
+	if (shell->hd_count > 0)
+	{
+		free(cmd->heredoc_line);
+		cmd->heredoc_line = NULL;
+	}
 	cmd->heredoc_line = ft_strdup("");
+	if (!cmd->heredoc_line)
+		malloc_error(shell);
 	while (cmd->heredoc_lines[i])
 	{
 		line = ft_strjoin(cmd->heredoc_lines[i], "\n");
 		if (!line)
 			malloc_error(shell);
-		free(cmd->heredoc_lines[i]);
-		temp = cmd->heredoc_line;
-		cmd->heredoc_line = ft_strjoin(temp, line);
-		free(temp);
+		mhol_strjoin(cmd, line, i);
 		free(line);
 		i++;
 	}

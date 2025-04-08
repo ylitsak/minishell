@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: saylital <saylital@student.hive.fi>        +#+  +:+       +#+         #
+#    By: smishos <smishos@student.hive.fi>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2025/03/24 17:42:23 by smishos           #+#    #+#              #
-#    Updated: 2025/03/29 13:30:49 by saylital         ###   ########.fr        #
+#    Updated: 2025/04/04 12:23:50 by smishos          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -20,6 +20,7 @@ SRCS = 	src/main.c \
 		src/builtin/echo.c \
 		src/builtin/pwd.c \
 		src/builtin/exit.c \
+		src/builtin/exit1.c \
 		src/builtin/env.c \
 		src/builtin/cd.c \
 		src/builtin/cd1.c \
@@ -42,6 +43,7 @@ SRCS = 	src/main.c \
 		src/parsing/parsing_utils6.c \
 		src/parsing/parsing_utils7.c \
 		src/parsing/parsing_utils8.c \
+		src/parsing/parsing_utils9.c \
 		src/error_cleanup/error_cleanup.c \
 		src/file_helpers.c \
 		src/execution/check_command.c \
@@ -50,8 +52,10 @@ SRCS = 	src/main.c \
 		src/execution/check_command3.c \
 		src/execution/check_command4.c \
 		src/execution/check_command5.c \
+		src/execution/check_command6.c \
 		src/signals/signals.c \
 		src/signals/signal_handlers.c
+
 OBJ_DIR = objects
 OBJS = $(addprefix $(OBJ_DIR)/,  $(SRCS:.c=.o))
 LIBFT = ./libft/libft.a

@@ -6,7 +6,7 @@
 /*   By: smishos <smishos@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/19 20:09:13 by smishos           #+#    #+#             */
-/*   Updated: 2025/03/19 20:09:14 by smishos          ###   ########.fr       */
+/*   Updated: 2025/04/05 17:32:39 by smishos          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,10 @@ int	find_closing_quote(t_ms *shell, const char *str, char quote_type, int start)
 	while (str[i] && str[i] != quote_type)
 		i++;
 	if (str[i] == quote_type)
+	{
+		shell->processed_quotes = 1;
 		return (i);
+	}
 	else
 	{
 		ft_putstr_fd(\
@@ -72,6 +75,8 @@ char	*qmark_check(t_ms *shell, int with_braces)
 			temp = shell->exp.value;
 			shell->exp.value = ft_strjoin(temp, temp_var);
 			free(temp);
+			if (!shell->exp.value)
+				malloc_error(shell);
 		}
 	}
 	return (shell->exp.value);
@@ -93,6 +98,7 @@ void	get_var_value(t_ms *shell)
 	char	*temp;
 	char	*joined;
 
+	temp = NULL;
 	while (shell->env_list[shell->exp_i])
 	{
 		if (ft_strncmp(shell->env_list[shell->exp_i], shell->exp_temp_name, \
@@ -103,14 +109,11 @@ void	get_var_value(t_ms *shell)
 			joined = ft_strjoin(temp, shell->env_list[shell->exp_i] + \
 				ft_strlen(shell->exp_temp_name) + 1);
 			free(temp);
-			shell->exp.value = ft_strdup(shell->env_list[shell->exp_i] + \
-				ft_strlen(shell->exp_temp_name) + 1);
+			var_val_mal_check(shell, joined);
 			free(joined);
 			break ;
 		}
 		shell->exp_i++;
 	}
-	temp = shell->exp.value;
-	shell->exp.value = parse_quotes(temp);
-	free(temp);
+	set_value_after_parse(shell, temp);
 }

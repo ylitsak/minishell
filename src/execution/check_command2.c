@@ -3,42 +3,55 @@
 /*                                                        :::      ::::::::   */
 /*   check_command2.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: saylital <saylital@student.hive.fi>        +#+  +:+       +#+        */
+/*   By: smishos <smishos@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/19 20:08:48 by smishos           #+#    #+#             */
-/*   Updated: 2025/03/30 14:54:03 by saylital         ###   ########.fr       */
+/*   Updated: 2025/04/06 16:34:45 by smishos          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../include/minishell.h"
 
-char	*find_directory(char **dir, char *splitted_args)
+char	*null_split_args(t_ms *shell, char *splitted_args)
+{
+	if (!(*splitted_args))
+	{
+		ft_putstr_fd("minishell: ", 2);
+		ft_putstr_fd(splitted_args, 2);
+		ft_putstr_fd(": command not found\n", 2);
+		shell->exit_code = 127;
+		return (NULL);
+	}
+	return (splitted_args);
+}
+
+char	*find_directory(t_ms *shell, char **dir, char *splitted_args)
 {
 	int		i;
 	char	*executable_path;
 	char	*slash;
 
-	i = 0;
-	while (dir[i] != NULL)
+	i = -1;
+	while (dir[++i] != NULL)
 	{
+		if (!null_split_args(shell, splitted_args))
+			return (NULL);
 		slash = ft_strjoin(dir[i], "/");
+		if (!slash)
+			malloc_error(shell);
 		executable_path = ft_strjoin(slash, splitted_args);
 		free(slash);
+		if (!executable_path)
+			malloc_error(shell);
 		if (access(executable_path, F_OK) == 0)
 		{
 			if (access(executable_path, X_OK) == 0)
 				return (executable_path);
-			ft_putendl_fd("minishell: Permission denied:", 2);
-			free(executable_path);
-			exit(126);
+			perm_den_exit(shell, executable_path);
 		}
 		free(executable_path);
-		i++;
 	}
-	ft_putstr_fd("minishell: ", 2);
-	ft_putstr_fd(splitted_args, 2);
-	ft_putstr_fd(": command not found\n", 2);
-	return (NULL);
+	return (cmd_not_found(splitted_args));
 }
 
 void	find_exec_path_error(t_ms *shell, char **args, \
@@ -86,15 +99,7 @@ char	*find_executable_path(t_ms *shell, char **args)
 	path_directory = ft_split(get_path, ':');
 	if (!path_directory)
 		return (NULL);
-	found_path = find_directory(path_directory, args[0]);
+	found_path = find_directory(shell, path_directory, args[0]);
 	free_split(path_directory);
 	return (found_path);
-}
-
-void	error_free_clean_exit(t_ms *shell, char *message)
-{
-	perror(message);
-	free(shell->commands->heredoc_line);
-	cleanup(shell, 1);
-	exit(EXIT_FAILURE);
 }

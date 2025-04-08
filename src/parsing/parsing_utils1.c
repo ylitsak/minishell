@@ -6,7 +6,7 @@
 /*   By: smishos <smishos@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/19 20:09:05 by smishos           #+#    #+#             */
-/*   Updated: 2025/03/19 20:09:06 by smishos          ###   ########.fr       */
+/*   Updated: 2025/04/06 17:02:39 by smishos          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,9 +19,13 @@ int	handle_expansions_if_braces(t_ms *shell, const char *str)
 	{
 		shell->exp.var_name = ft_substr(str, shell->exp.i, \
 			shell->exp.closing_brace - shell->exp.i + 1);
+		if (!shell->exp.var_name)
+			malloc_error(shell);
 		expand_env_var(shell, 1);
 		shell->exp.result = ft_realloc(shell->exp.result, shell->exp.j, \
 			shell->exp.j + ft_strlen(shell->exp.value) + 1);
+		if (!shell->exp.result)
+			malloc_error(shell);
 		ft_strlcpy(shell->exp.result + shell->exp.j, shell->exp.value, \
 			ft_strlen(shell->exp.value) + 1);
 		shell->exp.j += ft_strlen(shell->exp.value);
@@ -78,11 +82,15 @@ int	go_through_exp_cases(t_ms *shell, const char *str)
 		{
 			shell->exp.i++;
 			shell->exp.result = handle_expansions_quotes(shell, str);
-		}
-		if (handle_expansions_dollar_sign(shell, str) == -1)
-			return (0);
-		else
 			return (1);
+		}
+		else
+		{
+			if (handle_expansions_dollar_sign(shell, str) == -1)
+				return (0);
+			else
+				return (1);
+		}
 	}
 	else
 		realloc_and_write(shell, str, 0, 1);
@@ -93,19 +101,26 @@ char	*handle_expansions(t_ms *shell, const char *str)
 {
 	shell->exp.i = 0;
 	shell->exp.j = 0;
+	shell->processed_quotes = 0;
 	shell->exp.result = ft_strdup("");
-	if (!(shell->exp.result))
+	if (!shell->exp.result)
 		malloc_error(shell);
 	while (str[shell->exp.i])
 	{
 		if (!go_through_exp_cases(shell, str))
 			return (NULL);
-		continue ;
 	}
 	shell->exp.value = free_and_nullify(shell->exp.value);
 	shell->exp.var_name = free_and_nullify(shell->exp.var_name);
-	shell->exp.result = ft_realloc(shell->exp.result, shell->exp.j, \
-		shell->exp.j + 1);
+	shell->exp.result = \
+		ft_realloc(shell->exp.result, shell->exp.j, shell->exp.j + 1);
+	if (!shell->exp.result)
+		malloc_error(shell);
 	shell->exp.result[shell->exp.j] = '\0';
+	if (!shell->processed_quotes && shell->exp.result[0] == '\0')
+	{
+		free(shell->exp.result);
+		return (NULL);
+	}
 	return (shell->exp.result);
 }

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   export1.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: saylital <saylital@student.hive.fi>        +#+  +:+       +#+        */
+/*   By: smishos <smishos@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/19 20:08:16 by smishos           #+#    #+#             */
-/*   Updated: 2025/03/31 14:37:56 by saylital         ###   ########.fr       */
+/*   Updated: 2025/04/05 18:59:29 by smishos          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,11 +51,12 @@ void	if_value_not_empty(t_ms *shell, char *key, char *value, int i)
 {
 	char	*temp;
 
-	temp = ft_strjoin(key, "=\"");
+	temp = ft_strjoin(key, "=");
+	if (!temp)
+		malloc_error(shell);
 	shell->env_list[i] = ft_strjoin(temp, value);
-	free(temp);
-	temp = shell->env_list[i];
-	shell->env_list[i] = ft_strjoin(temp, "\"");
+	if (!shell->env_list[i])
+		malloc_error(shell);
 	free(temp);
 }
 
@@ -64,8 +65,12 @@ void	if_equal_found(t_ms *shell, char *key, int i)
 	char	*temp;
 
 	temp = ft_strjoin(key, "=\"\"");
+	if (!temp)
+		malloc_error(shell);
 	shell->env_list[i] = ft_strdup(temp);
 	free(temp);
+	if (!shell->env_list[i])
+		malloc_error(shell);
 }
 
 int	sift_through_env(t_ms *shell, char *key, char *value, int i)
@@ -84,7 +89,11 @@ int	sift_through_env(t_ms *shell, char *key, char *value, int i)
 		else if (shell->equal_found)
 			if_equal_found(shell, key, i);
 		else if (ft_strlen(value) == 0)
+		{
 			shell->env_list[i] = ft_strdup(key);
+			if (! shell->env_list[i])
+				malloc_error(shell);
+		}
 		return (1);
 	}
 	return (0);

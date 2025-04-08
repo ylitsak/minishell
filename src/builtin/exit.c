@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   exit.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: saylital <saylital@student.hive.fi>        +#+  +:+       +#+        */
+/*   By: smishos <smishos@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/02 14:33:02 by saylital          #+#    #+#             */
-/*   Updated: 2025/03/31 15:04:05 by saylital         ###   ########.fr       */
+/*   Updated: 2025/04/06 17:25:21 by smishos          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,18 +19,17 @@ int	is_overflown(char *str)
 
 	if (ft_strncmp("-9223372036854775808", str, 20) == 0)
 		return (1);
-	nbr = ft_atol(str);
+	nbr = msatol(str);
 	len = ft_strlen(str);
-	if ((nbr == 0 && len != 1) || (nbr == -1 && len != 2))
+	if (nbr == -1 && len != 2)
 		return (-1);
+	if (nbr == 0)
+		return (0);
 	return (1);
 }
 
-long long	exit_error_check(t_ms *shell, char **cmd)
+void	exit_error_check(t_ms *shell, char **cmd)
 {
-	long long	ret_val;
-
-	ret_val = LLONG_MIN;
 	if (cmd[1] != NULL)
 	{
 		if (validate_str(cmd[1], "-+0123456789") == -1 \
@@ -38,18 +37,17 @@ long long	exit_error_check(t_ms *shell, char **cmd)
 		{
 			ft_putstr_fd("exit\nminishell: exit: ", 2);
 			ft_putstr_fd(cmd[1], 2);
-			print_error(": numeric argument required", shell, 2, 1);
+			ft_putstr_fd(": numeric argument required\n", 2);
 			shell->exit_code = 2;
-			exit(shell->exit_code);
+			if (actually_exit(shell) == 1)
+				return ;
 		}
-		else
-			ret_val = ft_atol(cmd[1]);
 	}
-	return (ret_val);
 }
 
 void	it_was_alpha(t_command *command, t_ms *shell)
 {
+	shell->alpha_exit = 1;
 	shell->exit_code = 2;
 	ft_putstr_fd("minishell: exit: ", 2);
 	ft_putstr_fd(command->args[1], 2);
@@ -58,24 +56,24 @@ void	it_was_alpha(t_command *command, t_ms *shell)
 		shell->exit_code = 1;
 	if (ft_strncmp(command->args[1], "true", 4) == 0)
 		shell->exit_code = 0;
-	cleanup(shell, 1);
-	exit(shell->exit_code);
+	if (actually_exit(shell) == 1)
+		return ;
 }
 
-static void	check_numeric(t_command *command, t_ms *shell)
+void	check_numeric(t_command *command, t_ms *shell)
 {
-	int			i;
-	long long	ret_value;
+	int	i;
 
 	i = 0;
+	shell->alpha_exit = 0;
 	if (!command->args[1])
 		return ;
 	if (command->args[1][i] == '#')
 	{
 		shell->exit_code = 0;
 		ft_putstr_fd("exit\n", 2);
-		cleanup(shell, 1);
-		exit(shell->exit_code);
+		if (actually_exit(shell) == 1)
+			return ;
 	}
 	while (command->args[1][i])
 	{
@@ -83,12 +81,8 @@ static void	check_numeric(t_command *command, t_ms *shell)
 			it_was_alpha(command, shell);
 		i++;
 	}
-	ret_value = exit_error_check(shell, command->args);
-	if (ret_value && shell->exit_error_flag == 1)
-	{
-		print_error("exit: too many arguments", shell, 2, 1);
-		exit(shell->exit_code);
-	}
+	if (shell->alpha_exit == 0)
+		exit_error_check(shell, command->args);
 }
 
 void	ft_exit(t_command *command, t_ms *shell)
@@ -96,10 +90,12 @@ void	ft_exit(t_command *command, t_ms *shell)
 	if (!command->args[1] && !command->next)
 	{
 		ft_putstr_fd("exit\n", 2);
-		cleanup(shell, 1);
-		exit(shell->exit_code);
+		if (actually_exit(shell) == 1)
+			return ;
 	}
 	check_numeric(command, shell);
+	if (shell->alpha_exit)
+		return ;
 	if (command->arg_count > 2)
 	{
 		ft_putstr_fd("exit: too many arguments\n", 2);
@@ -110,7 +106,7 @@ void	ft_exit(t_command *command, t_ms *shell)
 	{
 		shell->exit_code = ft_atoi(command->args[1]);
 		ft_putstr_fd("exit\n", 1);
-		cleanup(shell, 1);
-		exit(shell->exit_code);
+		if (actually_exit(shell) == 1)
+			return ;
 	}
 }

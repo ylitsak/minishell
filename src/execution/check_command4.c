@@ -6,26 +6,11 @@
 /*   By: saylital <saylital@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/19 20:08:54 by smishos           #+#    #+#             */
-/*   Updated: 2025/03/30 15:14:39 by saylital         ###   ########.fr       */
+/*   Updated: 2025/04/07 13:24:05 by saylital         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../include/minishell.h"
-
-char	**check_empty_args(t_command *command, t_ms *shell)
-{
-	char	**args;
-
-	args = command->args;
-	while (args && *args && (*args)[0] == '\0')
-		args++;
-	if (!args || !args[0] || args[0][0] == '\0')
-	{
-		cleanup(shell, 1);
-		exit(0);
-	}
-	return (args);
-}
 
 void	execute_command(t_ms *shell, char **args)
 {
@@ -43,8 +28,12 @@ void	execute_command(t_ms *shell, char **args)
 		{
 			if (g_signal == SIGINT)
 				write(1, "\n", 1);
-			perror("minishell");
+			ft_putstr_fd("minishell execve: ", 2);
+			ft_putstr_fd(strerror(errno), 2);
+			ft_putstr_fd("\n", 2);
 			shell->exit_code = 126;
+			if (path)
+				free(path);
 			cleanup(shell, 1);
 			exit(shell->exit_code);
 		}
@@ -73,7 +62,7 @@ void	child_process(t_ms *shell, t_command *command, int *new_pipe)
 	i = -1;
 	while (command->command_input[++i])
 		execute_redir(shell, command, i);
-	args = check_empty_args(command, shell);
+	args = command->args;
 	shell->exec = is_builtin(args, shell);
 	execute_command(shell, args);
 	cleanup(shell, 1);
@@ -82,8 +71,7 @@ void	child_process(t_ms *shell, t_command *command, int *new_pipe)
 
 t_command	*parent_process(t_ms *shell, t_command *command, int *new_pipe)
 {
-	if ((shell->prev_pipe_in) != -1)
-		close((shell->prev_pipe_in));
+	close_prew_pipe(shell);
 	if (!command->next)
 		shell->last_pid = command->pid;
 	if (command->next)
@@ -95,10 +83,8 @@ t_command	*parent_process(t_ms *shell, t_command *command, int *new_pipe)
 	return (command);
 }
 
-t_command	*check_for_exit(t_ms *shell, t_command *command, int *new_pipe)
+t_command	*check_for_exit(t_ms *shell, t_command *command)
 {
-	if (shell->child_count > 1)
-		close(new_pipe[0]);
 	ft_exit(command, shell);
 	command = command->next;
 	return (command);

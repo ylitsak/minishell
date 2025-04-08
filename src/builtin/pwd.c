@@ -6,7 +6,7 @@
 /*   By: saylital <saylital@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/02 13:50:38 by saylital          #+#    #+#             */
-/*   Updated: 2025/03/29 16:17:36 by saylital         ###   ########.fr       */
+/*   Updated: 2025/04/07 13:06:17 by saylital         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,6 +44,8 @@ void	if_pwd(t_ms *shell, char *pwd)
 		{
 			free(shell->env_list[i]);
 			shell->env_list[i] = ft_strjoin("PWD=", pwd);
+			if (!shell->env_list[i])
+				malloc_error(shell);
 			break ;
 		}
 		i++;
@@ -61,6 +63,7 @@ void	ft_pwd(char **command, t_ms *shell)
 		if (if_not_pwd(shell))
 			return ;
 	}
+	signal(SIGPIPE, SIG_IGN);
 	if_pwd(shell, pwd);
 	ft_putstr_fd(pwd, 1);
 	ft_putstr_fd("\n", 1);
